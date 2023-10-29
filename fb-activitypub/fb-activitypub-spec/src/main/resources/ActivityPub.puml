@@ -1,0 +1,217 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package activitystream {
+class ObjectOrLink #grey{
+    URI id
+    List<URI> type
+    String mediaType
+    String name
+    ObjectOrLink preview
+
+}
+class Object #grey{
+    List<ObjectOrLink> attachment
+    List<ObjectOrLink> attributedTo
+    List<ObjectOrLink> audience
+    String content
+    List<ObjectOrLink> context
+    Date endTime
+    ObjectOrLink generator
+    List<ObjectOrLink> icon
+    List<ObjectOrLink> image
+    ObjectOrLink inReplyTo
+    List<ObjectOrLink> location
+    Date published
+    Collection replies
+    Date startTime
+    String summary
+    List<ObjectOrLink> tag
+    Date updated
+    List<Link> url
+    List<ObjectOrLink> to
+    List<ObjectOrLink> bto
+    List<ObjectOrLink> cc
+    List<ObjectOrLink> bcc
+    String duration
+}
+
+class Link #grey {
+       URI href
+        List<String> rel
+        String hreflang
+        Integer height
+        Integer width
+}
+
+class Activity #grey {
+       List<ObjectOrLink> actor
+       List<ObjectOrLink> object
+       ObjectOrLink target
+       ObjectOrLink result
+       ObjectOrLink origin
+       List<ObjectOrLink> instrument
+}
+
+class IntransitiveActivity #grey{
+       List<ObjectOrLink> actor
+       ObjectOrLink target
+       ObjectOrLink result
+        ObjectOrLink origin
+       List<ObjectOrLink> instrument
+}
+
+class Collection #grey {
+       Integer totalItems
+       ObjectOrLink current
+       ObjectOrLink first
+       ObjectOrLink last
+       List<ObjectOrLink> items
+}
+
+class OrderedCollection #grey {}
+
+class CollectionPage #grey {
+    ObjectOrLink partOf
+    ObjectOrLink next
+    ObjectOrLink prev
+}
+
+class OrderedCollectionPage #grey {
+    Integer startIndex
+}
+package activity {
+class Accept {}
+class TentativeAccept {}
+class Add {}
+class Arrive #grey {}
+class Create {}
+class Delete {}
+class Follow {}
+class Ignore #grey {}
+class Join #grey
+class Leave #grey {}
+class Like #grey {}
+class Offer #grey {}
+class Invite #grey {}
+class Reject #grey {}
+class TentativeReject #grey {}
+class Remove #grey {}
+class Undo #grey {}
+class Update #grey {}
+class View #grey {}
+class Listen #grey {}
+class Read #grey {}
+class Move #grey {}
+class Travel #grey {}
+class Announce
+class Block #grey {}
+class Flag
+class Dislike
+class Question #grey {
+    List<ObjectOrLink> oneOf
+    List<ObjectOrLink> anyOf
+    List<ObjectOrLink> closed
+}
+}
+
+class Actor #grey
+Object <|-- Actor
+package actor {
+class Application #grey
+Actor <|-- Application
+class Group #grey
+Actor <|-- Group
+class Organization #grey
+Actor <|-- Organization
+class Person #grey
+Actor <|-- Person
+class Service #grey
+Actor <|-- Service
+}
+package link {
+class Mention #grey
+}
+package object {
+class Relationship #grey {
+ObjectOrLink subject
+List<ObjectOrLink> object
+Object relationship
+}
+class Article #grey
+class Document #grey
+class Audio #grey
+class Image #grey
+class Video #grey
+class Note #grey
+class Page #grey
+class Event #grey
+class Place #grey {
+Float accuracy
+Float altitude
+Float latitude
+Float longitude
+Float radius
+URI units
+}
+class Profile #grey {
+Object describes
+}
+class Tombstone #grey {
+Object formerType
+Date deleted
+}
+}
+
+}
+ObjectOrLink <|-- Object
+ObjectOrLink <|-- Link
+Object <|-- Activity
+Object <|-- IntransitiveActivity
+Object <|-- Collection
+Collection <|-- OrderedCollection
+Collection <|-- CollectionPage
+OrderedCollection <|-- OrderedCollectionPage
+CollectionPage <|-- OrderedCollectionPage
+Activity <|-- Accept
+Accept <|-- TentativeAccept
+Activity <|-- Add
+IntransitiveActivity <|-- Arrive
+Activity <|-- Create
+Activity <|-- Delete
+Activity <|-- Follow
+Activity <|-- Ignore
+Activity <|-- Join
+Activity <|-- Leave
+Activity <|-- Like
+Activity <|-- Offer
+Offer <|-- Invite
+Activity <|-- Reject
+Reject <|-- TentativeReject
+Activity <|-- Remove
+Activity <|-- Undo
+Activity <|-- Update
+Activity <|-- View
+Activity <|-- Listen
+Activity <|-- Read
+Activity <|-- Move
+IntransitiveActivity <|-- Travel
+Activity <|-- Announce
+Ignore <|-- Block
+Activity <|-- Flag
+Activity <|-- Dislike
+IntransitiveActivity <|-- Question
+Object <|-- Relationship
+Object <|-- Article
+Object <|-- Document
+Document <|-- Audio
+Document <|-- Image
+Document <|-- Video
+Object <|-- Note
+Document <|-- Page
+Object <|-- Event
+Object <|-- Place
+Link <|-- Mention
+Object <|-- Profile
+Object <|-- Tombstone
+@enduml

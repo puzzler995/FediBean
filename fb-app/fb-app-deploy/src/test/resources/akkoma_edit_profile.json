@@ -1,0 +1,51 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://akkoma.swampnet.club/schemas/litepub-0.1.jsonld",
+    {
+      "@language": "und"
+    }
+  ],
+  "actor": "https://akkoma.swampnet.club/users/puzzler",
+  "bcc": [],
+  "bto": [],
+  "cc": [],
+  "id": "https://akkoma.swampnet.club/activities/1d876af6-0ec4-47c9-80aa-c912f6ea1949",
+  "object": {
+    "alsoKnownAs": [],
+    "attachment": [],
+    "capabilities": {},
+    "content": "",
+    "discoverable": false,
+    "endpoints": {
+      "oauthAuthorizationEndpoint": "https://akkoma.swampnet.club/oauth/authorize",
+      "oauthRegistrationEndpoint": "https://akkoma.swampnet.club/api/v1/apps",
+      "oauthTokenEndpoint": "https://akkoma.swampnet.club/oauth/token",
+      "sharedInbox": "https://akkoma.swampnet.club/inbox",
+      "uploadMedia": "https://akkoma.swampnet.club/api/ap/upload_media"
+    },
+    "featured": "https://akkoma.swampnet.club/users/puzzler/collections/featured",
+    "followers": "https://akkoma.swampnet.club/users/puzzler/followers",
+    "following": "https://akkoma.swampnet.club/users/puzzler/following",
+    "id": "https://akkoma.swampnet.club/users/puzzler",
+    "inbox": "https://akkoma.swampnet.club/users/puzzler/inbox",
+    "manuallyApprovesFollowers": false,
+    "name": "puzzler",
+    "outbox": "https://akkoma.swampnet.club/users/puzzler/outbox",
+    "preferredUsername": "puzzler",
+    "publicKey": {
+      "id": "https://akkoma.swampnet.club/users/puzzler#main-key",
+      "owner": "https://akkoma.swampnet.club/users/puzzler",
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAij5A2BrqU37x0Ik07hcR\nk1EMCAhQfVoDWTtwnWV3zdO7BMOWEtwFY8EmfBzQV0Ysw3pTUcEuQJ1mr3Mgh87R\n53FCceCuhQANtcYqgCDn9sAlP3SMOleoFh2EuG/aAvYrhAEmWV19SINWtfO6h8Cr\n7oVKeWooUoZiFpUZOwrO2Bg8gDF1WH31d0FNt7I+8ouadk8xtPDHdfrsygDHJyqc\nc2IdgzyfgWtD4AAr2kcFxQyLr7OxlijgSXbCqLhMUowflBFfcYpB49qzO23C5vjx\ntMxOxxGovpukuhwke7A/KANlOoB3w25lMpnB0MNNGvujMp1WOKmstJ4dakOJko1P\nawIDAQAB\n-----END PUBLIC KEY-----\n\n"
+    },
+    "summary": "YJTGFDYFGJT",
+    "tag": [],
+    "type": "Person",
+    "url": "https://akkoma.swampnet.club/users/puzzler"
+  },
+  "to": [
+    "https://akkoma.swampnet.club/users/puzzler/followers",
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "type": "Update"
+}

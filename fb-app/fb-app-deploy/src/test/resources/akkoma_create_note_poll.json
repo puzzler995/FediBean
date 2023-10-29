@@ -1,0 +1,94 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://akkoma.swampnet.club/schemas/litepub-0.1.jsonld",
+    {
+      "@language": "und"
+    }
+  ],
+  "actor": "https://akkoma.swampnet.club/users/puzzler",
+  "cc": [
+    "https://akkoma.swampnet.club/users/puzzler/followers"
+  ],
+  "context": "https://akkoma.swampnet.club/contexts/f2af1a58-5cd3-4f58-ad2f-1406923d90ab",
+  "directMessage": false,
+  "id": "https://akkoma.swampnet.club/activities/1194e17f-2729-4238-952b-d7ac0eb489a4",
+  "object": {
+    "actor": "https://akkoma.swampnet.club/users/puzzler",
+    "anyOf": [
+      {
+        "name": "Masto",
+        "replies": {
+          "totalItems": 0,
+          "type": "Collection"
+        },
+        "type": "Note"
+      },
+      {
+        "name": "Fire",
+        "replies": {
+          "totalItems": 0,
+          "type": "Collection"
+        },
+        "type": "Note"
+      },
+      {
+        "name": "koma",
+        "replies": {
+          "totalItems": 0,
+          "type": "Collection"
+        },
+        "type": "Note"
+      },
+      {
+        "name": "goto",
+        "replies": {
+          "totalItems": 0,
+          "type": "Collection"
+        },
+        "type": "Note"
+      }
+    ],
+    "attachment": [],
+    "attributedTo": "https://akkoma.swampnet.club/users/puzzler",
+    "cc": [
+      "https://akkoma.swampnet.club/users/puzzler/followers"
+    ],
+    "closed": "2023-10-27T17:30:23.952321Z",
+    "content": "What service do you use? :ablobfoxbongo:",
+    "contentMap": {
+      "en": "What service do you use? :ablobfoxbongo:"
+    },
+    "context": "https://akkoma.swampnet.club/contexts/f2af1a58-5cd3-4f58-ad2f-1406923d90ab",
+    "conversation": "https://akkoma.swampnet.club/contexts/f2af1a58-5cd3-4f58-ad2f-1406923d90ab",
+    "id": "https://akkoma.swampnet.club/objects/a176c59a-6fa9-46a6-9322-a99866f380be",
+    "published": "2023-10-27T17:20:23.953392Z",
+    "sensitive": null,
+    "source": {
+      "content": "What service do you use? :ablobfoxbongo:",
+      "mediaType": "text/plain"
+    },
+    "summary": "",
+    "tag": [
+      {
+        "icon": {
+          "type": "Image",
+          "url": "https://akkoma.swampnet.club/emoji/testpack/ablobfoxbongo.png"
+        },
+        "id": "https://akkoma.swampnet.club/emoji/testpack/ablobfoxbongo.png",
+        "name": ":ablobfoxbongo:",
+        "type": "Emoji",
+        "updated": "1970-01-01T00:00:00Z"
+      }
+    ],
+    "to": [
+      "https://www.w3.org/ns/activitystreams#Public"
+    ],
+    "type": "Question"
+  },
+  "published": "2023-10-27T17:20:23.953332Z",
+  "to": [
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "type": "Create"
+}

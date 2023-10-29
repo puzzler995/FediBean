@@ -1,0 +1,69 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1",
+    {
+      "manuallyApprovesFollowers": "as:manuallyApprovesFollowers",
+      "movedToUri": "as:movedTo",
+      "sensitive": "as:sensitive",
+      "Hashtag": "as:Hashtag",
+      "quoteUri": "fedibird:quoteUri",
+      "quoteUrl": "as:quoteUrl",
+      "toot": "http://joinmastodon.org/ns#",
+      "Emoji": "toot:Emoji",
+      "featured": "toot:featured",
+      "discoverable": "toot:discoverable",
+      "schema": "http://schema.org#",
+      "PropertyValue": "schema:PropertyValue",
+      "value": "schema:value",
+      "misskey": "https://misskey-hub.net/ns#",
+      "_misskey_content": "misskey:_misskey_content",
+      "_misskey_quote": "misskey:_misskey_quote",
+      "_misskey_reaction": "misskey:_misskey_reaction",
+      "_misskey_votes": "misskey:_misskey_votes",
+      "_misskey_talk": "misskey:_misskey_talk",
+      "isCat": "misskey:isCat",
+      "fedibird": "http://fedibird.com/ns#",
+      "vcard": "http://www.w3.org/2006/vcard/ns#"
+    }
+  ],
+  "id": "https://firefish.swampnet.club/notes/9lcwkhgjnn4zu9b3/activity",
+  "actor": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+  "type": "Create",
+  "published": "2023-10-28T01:03:23.491Z",
+  "object": {
+    "id": "https://firefish.swampnet.club/notes/9lcwkhgjnn4zu9b3",
+    "type": "Note",
+    "attributedTo": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+    "summary": "waaaaaaaa",
+    "content": "<p><span>ActivityPub is a mess holy shit </span><a href=\"https://akkoma.swampnet.club/users/puzzler\" class=\"u-url mention\">@puzzler@akkoma.swampnet.club</a></p>",
+    "_misskey_content": "ActivityPub is a mess holy shit @puzzler@akkoma.swampnet.club",
+    "source": {
+      "content": "ActivityPub is a mess holy shit @puzzler@akkoma.swampnet.club",
+      "mediaType": "text/x.misskeymarkdown"
+    },
+    "published": "2023-10-28T01:03:23.491Z",
+    "to": [
+      "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/followers"
+    ],
+    "cc": [
+      "https://akkoma.swampnet.club/users/puzzler"
+    ],
+    "inReplyTo": null,
+    "attachment": [],
+    "sensitive": true,
+    "tag": [
+      {
+        "type": "Mention",
+        "href": "https://akkoma.swampnet.club/users/puzzler",
+        "name": "@puzzler@akkoma.swampnet.club"
+      }
+    ]
+  },
+  "to": [
+    "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/followers"
+  ],
+  "cc": [
+    "https://akkoma.swampnet.club/users/puzzler"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1",
+    {
+      "manuallyApprovesFollowers": "as:manuallyApprovesFollowers",
+      "movedToUri": "as:movedTo",
+      "sensitive": "as:sensitive",
+      "Hashtag": "as:Hashtag",
+      "quoteUri": "fedibird:quoteUri",
+      "quoteUrl": "as:quoteUrl",
+      "toot": "http://joinmastodon.org/ns#",
+      "Emoji": "toot:Emoji",
+      "featured": "toot:featured",
+      "discoverable": "toot:discoverable",
+      "schema": "http://schema.org#",
+      "PropertyValue": "schema:PropertyValue",
+      "value": "schema:value",
+      "misskey": "https://misskey-hub.net/ns#",
+      "_misskey_content": "misskey:_misskey_content",
+      "_misskey_quote": "misskey:_misskey_quote",
+      "_misskey_reaction": "misskey:_misskey_reaction",
+      "_misskey_votes": "misskey:_misskey_votes",
+      "_misskey_talk": "misskey:_misskey_talk",
+      "isCat": "misskey:isCat",
+      "fedibird": "http://fedibird.com/ns#",
+      "vcard": "http://www.w3.org/2006/vcard/ns#"
+    }
+  ],
+  "id": "https://firefish.swampnet.club/notes/9lcwn1z9vfiszrhs/activity",
+  "actor": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+  "type": "Create",
+  "published": "2023-10-28T01:05:23.397Z",
+  "object": {
+    "id": "https://firefish.swampnet.club/notes/9lcwn1z9vfiszrhs",
+    "type": "Note",
+    "attributedTo": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+    "summary": "waaaaaaaa",
+    "content": "<p><i><span>why is this so bad</span></i></p>",
+    "_misskey_content": "*why is this so bad*",
+    "source": {
+      "content": "*why is this so bad*",
+      "mediaType": "text/x.misskeymarkdown"
+    },
+    "published": "2023-10-28T01:05:23.397Z",
+    "to": [
+      "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/followers"
+    ],
+    "cc": [
+      "https://www.w3.org/ns/activitystreams#Public"
+    ],
+    "inReplyTo": "https://firefish.swampnet.club/notes/9lcwkhgjnn4zu9b3",
+    "attachment": [],
+    "sensitive": true,
+    "tag": []
+  },
+  "to": [
+    "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/followers"
+  ],
+  "cc": [
+    "https://www.w3.org/ns/activitystreams#Public"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://akkoma.swampnet.club/schemas/litepub-0.1.jsonld",
+    {
+      "@language": "und"
+    }
+  ],
+  "actor": "https://akkoma.swampnet.club/users/puzzler",
+  "bcc": [],
+  "bto": [],
+  "cc": [
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "context": "https://firefish.swampnet.club/notes/9lceep04yz5lkdqi",
+  "id": "https://akkoma.swampnet.club/activities/9eb97688-30aa-475c-8033-dc8a6f655bcc",
+  "object": "https://firefish.swampnet.club/notes/9lceep04yz5lkdqi",
+  "to": [
+    "https://akkoma.swampnet.club/users/puzzler/followers",
+    "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv"
+  ],
+  "type": "Like"
+}

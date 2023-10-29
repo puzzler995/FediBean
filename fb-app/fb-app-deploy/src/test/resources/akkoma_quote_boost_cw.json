@@ -1,0 +1,58 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://akkoma.swampnet.club/schemas/litepub-0.1.jsonld",
+    {
+      "@language": "und"
+    }
+  ],
+  "actor": "https://akkoma.swampnet.club/users/puzzler",
+  "cc": [
+    "https://akkoma.swampnet.club/users/puzzler/followers"
+  ],
+  "context": "https://firefish.swampnet.club/notes/9lcdwhj8ho43021q",
+  "directMessage": false,
+  "id": "https://akkoma.swampnet.club/activities/727884a2-d9d0-4415-a906-84590e2be69b",
+  "object": {
+    "actor": "https://akkoma.swampnet.club/users/puzzler",
+    "attachment": [],
+    "attributedTo": "https://akkoma.swampnet.club/users/puzzler",
+    "cc": [
+      "https://akkoma.swampnet.club/users/puzzler/followers"
+    ],
+    "content": "<span class=\"h-card\"><a class=\"u-url mention\" data-user=\"AbCRDsoXiBcTbUoFv6\" href=\"https://firefish.swampnet.club/@puzzler\" rel=\"ugc\">@<span>puzzler</span></a></span> testquote<span class=\"quote-inline\"><br/><br/>RE: <a href=\"https://firefish.swampnet.club/notes/9lcdwhj8ho43021q\">https://firefish.swampnet.club/notes/9lcdwhj8ho43021q</a></span>",
+    "contentMap": {
+      "en": "<span class=\"h-card\"><a class=\"u-url mention\" data-user=\"AbCRDsoXiBcTbUoFv6\" href=\"https://firefish.swampnet.club/@puzzler\" rel=\"ugc\">@<span>puzzler</span></a></span> testquote"
+    },
+    "context": "https://firefish.swampnet.club/notes/9lcdwhj8ho43021q",
+    "conversation": "https://firefish.swampnet.club/notes/9lcdwhj8ho43021q",
+    "id": "https://akkoma.swampnet.club/objects/d4be167d-e9c0-4748-8efc-54384950958f",
+    "published": "2023-10-28T00:34:39.184110Z",
+    "quoteUri": "https://firefish.swampnet.club/notes/9lcdwhj8ho43021q",
+    "quoteUrl": "https://firefish.swampnet.club/notes/9lcdwhj8ho43021q",
+    "sensitive": true,
+    "source": {
+      "content": "@puzzler@firefish.swampnet.club testquote",
+      "mediaType": "text/plain"
+    },
+    "summary": "cw",
+    "tag": [
+      {
+        "href": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+        "name": "@puzzler@firefish.swampnet.club",
+        "type": "Mention"
+      }
+    ],
+    "to": [
+      "https://www.w3.org/ns/activitystreams#Public",
+      "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv"
+    ],
+    "type": "Note"
+  },
+  "published": "2023-10-28T00:34:39.183987Z",
+  "to": [
+    "https://www.w3.org/ns/activitystreams#Public",
+    "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv"
+  ],
+  "type": "Create"
+}

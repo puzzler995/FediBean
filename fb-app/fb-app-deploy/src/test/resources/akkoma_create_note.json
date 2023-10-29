@@ -1,0 +1,48 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://akkoma.swampnet.club/schemas/litepub-0.1.jsonld",
+    {
+      "@language": "und"
+    }
+  ],
+  "actor": "https://akkoma.swampnet.club/users/puzzler",
+  "cc": [
+    "https://akkoma.swampnet.club/users/puzzler/followers"
+  ],
+  "context": "https://akkoma.swampnet.club/contexts/d3af1eab-4e15-4350-b030-86b6b73f3426",
+  "directMessage": false,
+  "id": "https://akkoma.swampnet.club/activities/d5adc98c-caba-460e-a01d-2e59824650ea",
+  "object": {
+    "actor": "https://akkoma.swampnet.club/users/puzzler",
+    "attachment": [],
+    "attributedTo": "https://akkoma.swampnet.club/users/puzzler",
+    "cc": [
+      "https://akkoma.swampnet.club/users/puzzler/followers"
+    ],
+    "content": "test2",
+    "contentMap": {
+      "en": "test2"
+    },
+    "context": "https://akkoma.swampnet.club/contexts/d3af1eab-4e15-4350-b030-86b6b73f3426",
+    "conversation": "https://akkoma.swampnet.club/contexts/d3af1eab-4e15-4350-b030-86b6b73f3426",
+    "id": "https://akkoma.swampnet.club/objects/891da966-b513-4f63-9d2a-99dcc29ca78d",
+    "published": "2023-10-27T16:58:00.934652Z",
+    "sensitive": null,
+    "source": {
+      "content": "test2",
+      "mediaType": "text/plain"
+    },
+    "summary": "",
+    "tag": [],
+    "to": [
+      "https://www.w3.org/ns/activitystreams#Public"
+    ],
+    "type": "Note"
+  },
+  "published": "2023-10-27T16:58:00.934543Z",
+  "to": [
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "type": "Create"
+}

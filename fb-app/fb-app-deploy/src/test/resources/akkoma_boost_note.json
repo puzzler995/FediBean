@@ -1,0 +1,22 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://akkoma.swampnet.club/schemas/litepub-0.1.jsonld",
+    {
+      "@language": "und"
+    }
+  ],
+  "actor": "https://akkoma.swampnet.club/users/puzzler",
+  "bto": [],
+  "cc": [],
+  "context": "https://firefish.swampnet.club/notes/9lceep04yz5lkdqi",
+  "id": "https://akkoma.swampnet.club/activities/1ffe7f42-456b-42dd-906e-8a3e31fc7595",
+  "object": "https://firefish.swampnet.club/notes/9lceep04yz5lkdqi",
+  "published": "2023-10-27T17:03:47.198061Z",
+  "to": [
+    "https://akkoma.swampnet.club/users/puzzler/followers",
+    "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "type": "Announce"
+}

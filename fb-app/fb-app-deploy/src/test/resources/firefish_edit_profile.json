@@ -1,0 +1,66 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1",
+    {
+      "manuallyApprovesFollowers": "as:manuallyApprovesFollowers",
+      "movedToUri": "as:movedTo",
+      "sensitive": "as:sensitive",
+      "Hashtag": "as:Hashtag",
+      "quoteUri": "fedibird:quoteUri",
+      "quoteUrl": "as:quoteUrl",
+      "toot": "http://joinmastodon.org/ns#",
+      "Emoji": "toot:Emoji",
+      "featured": "toot:featured",
+      "discoverable": "toot:discoverable",
+      "schema": "http://schema.org#",
+      "PropertyValue": "schema:PropertyValue",
+      "value": "schema:value",
+      "misskey": "https://misskey-hub.net/ns#",
+      "_misskey_content": "misskey:_misskey_content",
+      "_misskey_quote": "misskey:_misskey_quote",
+      "_misskey_reaction": "misskey:_misskey_reaction",
+      "_misskey_votes": "misskey:_misskey_votes",
+      "_misskey_talk": "misskey:_misskey_talk",
+      "isCat": "misskey:isCat",
+      "fedibird": "http://fedibird.com/ns#",
+      "vcard": "http://www.w3.org/2006/vcard/ns#"
+    }
+  ],
+  "id": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv#updates/1698455306428",
+  "actor": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+  "type": "Update",
+  "to": [
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "object": {
+    "type": "Person",
+    "id": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+    "inbox": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/inbox",
+    "outbox": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/outbox",
+    "followers": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/followers",
+    "following": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/following",
+    "featured": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv/collections/featured",
+    "sharedInbox": "https://firefish.swampnet.club/inbox",
+    "endpoints": {
+      "sharedInbox": "https://firefish.swampnet.club/inbox"
+    },
+    "url": "https://firefish.swampnet.club/@puzzler",
+    "preferredUsername": "puzzler",
+    "name": null,
+    "summary": null,
+    "icon": null,
+    "image": null,
+    "tag": [],
+    "manuallyApprovesFollowers": false,
+    "discoverable": true,
+    "publicKey": {
+      "id": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv#main-key",
+      "type": "Key",
+      "owner": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAisfsjH/fSU589hkYX4Bk\nNtBKTp5nV6jhzl1aEOMLNsh3MivXR9YH1xx+195ZjCcTrW5XI8WuUGyZCSseREOo\nlqHkbyek0VU9QnkYvvaAcwby7kbjpkeu8Ei19CEd/RJw6EGWVqF4OJ3wWneSJRoZ\n/Xzklc9RXzFQWWLN5B9G4GR3RtxF0JZyOLn9bqVWljEh6LiclY3gxFq/jNX5BRA6\nDE0HUrTG7s+cXTRbi4ehIRMy4v0WurzRael8HbKRY/vBktAef1lcmncgOsOogD8x\n8DAglQbifZUREbN9gcLlSAc8kxF4nDBKjYw8yWmWo9xsF9tdZYz7wlGJmyRzXah0\n6XOU03ST7HE/PTPqFjvM+BW2c1VUqL/ltD2AfubISaTUhc5iNb4g4hbzoM8JU8lj\nXKIMxLqYD4xLLQyu7JoXS90zRkZAnqWBMUEtNMB5yQAI/z1YeWwkcQjULStijEYs\nVXiQNQujBVYuUzVd1qHAjDfvIItELqMoDbRLS4Ao8UmFmDYWHjQgHT0o6rj1fMVh\nHuSybsvGYPcZqUFTEwKkyxBqKesmemSZ6FstXu9UrXrVKMkTxHCEgciT4aUTNhFi\nNxRQlyRiugUAR773kZ4NaOYNr0K2I3/AFcdMmurb1LShwXV5CaHs8c5Biqf0Lfiu\n+tmfO79HdB2ie46o/nEuxo0CAwEAAQ==\n-----END PUBLIC KEY-----\n"
+    },
+    "isCat": true
+  },
+  "published": "2023-10-28T01:08:26.428Z"
+}

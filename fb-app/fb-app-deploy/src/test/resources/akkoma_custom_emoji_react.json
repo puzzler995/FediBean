@@ -1,0 +1,35 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://akkoma.swampnet.club/schemas/litepub-0.1.jsonld",
+    {
+      "@language": "und"
+    }
+  ],
+  "actor": "https://akkoma.swampnet.club/users/puzzler",
+  "bcc": [],
+  "bto": [],
+  "cc": [
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "content": ":ablobfoxbongo:",
+  "context": "https://firefish.swampnet.club/notes/9lceep04yz5lkdqi",
+  "id": "https://akkoma.swampnet.club/activities/923310d9-2b24-4cf8-86bb-f50ce3e719a0",
+  "object": "https://firefish.swampnet.club/notes/9lceep04yz5lkdqi",
+  "tag": [
+    {
+      "icon": {
+        "type": "Image",
+        "url": "https://akkoma.swampnet.club/emoji/testpack/ablobfoxbongo.png"
+      },
+      "id": "https://akkoma.swampnet.club/emoji/testpack/ablobfoxbongo.png",
+      "name": "ablobfoxbongo",
+      "type": "Emoji"
+    }
+  ],
+  "to": [
+    "https://akkoma.swampnet.club/users/puzzler/followers",
+    "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv"
+  ],
+  "type": "EmojiReact"
+}

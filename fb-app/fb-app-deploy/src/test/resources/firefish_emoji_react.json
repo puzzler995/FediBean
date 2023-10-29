@@ -1,0 +1,49 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1",
+    {
+      "manuallyApprovesFollowers": "as:manuallyApprovesFollowers",
+      "movedToUri": "as:movedTo",
+      "sensitive": "as:sensitive",
+      "Hashtag": "as:Hashtag",
+      "quoteUri": "fedibird:quoteUri",
+      "quoteUrl": "as:quoteUrl",
+      "toot": "http://joinmastodon.org/ns#",
+      "Emoji": "toot:Emoji",
+      "featured": "toot:featured",
+      "discoverable": "toot:discoverable",
+      "schema": "http://schema.org#",
+      "PropertyValue": "schema:PropertyValue",
+      "value": "schema:value",
+      "misskey": "https://misskey-hub.net/ns#",
+      "_misskey_content": "misskey:_misskey_content",
+      "_misskey_quote": "misskey:_misskey_quote",
+      "_misskey_reaction": "misskey:_misskey_reaction",
+      "_misskey_votes": "misskey:_misskey_votes",
+      "_misskey_talk": "misskey:_misskey_talk",
+      "isCat": "misskey:isCat",
+      "fedibird": "http://fedibird.com/ns#",
+      "vcard": "http://www.w3.org/2006/vcard/ns#"
+    }
+  ],
+  "type": "Like",
+  "id": "https://firefish.swampnet.club/likes/9lcvytm2l12ruolj",
+  "actor": "https://firefish.swampnet.club/users/9lcb5iw3qm0zyytv",
+  "object": "https://akkoma.swampnet.club/objects/d4be167d-e9c0-4748-8efc-54384950958f",
+  "content": ":ablobfoxbongohyper:",
+  "_misskey_reaction": ":ablobfoxbongohyper:",
+  "tag": [
+    {
+      "id": "https://firefish.swampnet.club/emojis/ablobfoxbongohyper",
+      "type": "Emoji",
+      "name": ":ablobfoxbongohyper:",
+      "updated": "2023-10-28T00:45:49.949Z",
+      "icon": {
+        "type": "Image",
+        "mediaType": "image/apng",
+        "url": "https://firefish.swampnet.club/files/256821ad-adda-4737-b37f-9f88cf884928"
+      }
+    }
+  ]
+}
