@@ -16,6 +16,7 @@ public class JsonContextListSerializer extends StdSerializer<List<JsonContext>> 
   public JsonContextListSerializer() {
     this(List.class);
   }
+
   @SuppressWarnings("unchecked")
   public JsonContextListSerializer(@Nonnull Class<?> t) {
     super((Class<List<JsonContext>>) t);

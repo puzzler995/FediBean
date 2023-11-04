@@ -26,7 +26,6 @@ public class DBEntity implements Serializable {
   private UUID id;
 
   @CreatedDate
-    @Column(name = "created_at", nullable = false)
-    private ZonedDateTime createdAt;
-
+  @Column(name = "created_at", nullable = false)
+  private ZonedDateTime createdAt;
 }

@@ -14,8 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -32,32 +32,32 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = ExampleConstants.APP_TABLE_NAME)
 public class App implements Serializable {
-    private static final long serialVersionUID = -516141725011175460L;
-    @Id
-    @Column(name = ExampleConstants.APP_COLUMN_ID_NAME, nullable = false, length = 32)
-    private String id;
+  private static final long serialVersionUID = -516141725011175460L;
 
-    @Column(name = ExampleConstants.APP_COLUMN_CREATEDAT_NAME, nullable = false)
-    private OffsetDateTime createdAt;
+  @Id
+  @Column(name = ExampleConstants.APP_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.SET_NULL)
-    @JoinColumn(name = "\"userId\"")
-    private User user;
+  @Column(name = ExampleConstants.APP_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
 
-    @Column(name = ExampleConstants.APP_COLUMN_SECRET_NAME, nullable = false, length = 64)
-    private String secret;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.SET_NULL)
+  @JoinColumn(name = "\"userId\"")
+  private User user;
 
-    @Column(name = ExampleConstants.APP_COLUMN_NAME_NAME, nullable = false, length = 128)
-    private String name;
+  @Column(name = ExampleConstants.APP_COLUMN_SECRET_NAME, nullable = false, length = 64)
+  private String secret;
 
-    @Column(name = ExampleConstants.APP_COLUMN_DESCRIPTION_NAME, nullable = false, length = 512)
-    private String description;
+  @Column(name = ExampleConstants.APP_COLUMN_NAME_NAME, nullable = false, length = 128)
+  private String name;
 
-    @Column(name = ExampleConstants.APP_COLUMN_PERMISSION_NAME, nullable = false)
-    private List<String> permission;
+  @Column(name = ExampleConstants.APP_COLUMN_DESCRIPTION_NAME, nullable = false, length = 512)
+  private String description;
 
-    @Column(name = ExampleConstants.APP_COLUMN_CALLBACKURL_NAME, length = 512)
-    private String callbackUrl;
+  @Column(name = ExampleConstants.APP_COLUMN_PERMISSION_NAME, nullable = false)
+  private List<String> permission;
 
+  @Column(name = ExampleConstants.APP_COLUMN_CALLBACKURL_NAME, length = 512)
+  private String callbackUrl;
 }

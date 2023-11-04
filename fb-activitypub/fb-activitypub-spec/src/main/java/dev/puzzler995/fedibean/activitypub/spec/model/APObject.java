@@ -120,10 +120,13 @@ public class APObject extends Resolvable {
   private Boolean sensitive;
   private LdSignature signature;
   private String value;
+
   @JsonProperty("_misskey_content")
   private String misskeyContent;
+
   @JsonProperty("_misskey_quote")
   private CompactedIri misskeyQuote;
+
   private CompactedIri quoteUri;
 
   @JsonGetter("mediaType")

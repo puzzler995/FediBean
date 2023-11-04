@@ -120,7 +120,8 @@ public class User extends DBItem implements Serializable {
   @Column(name = DBConstant.USER_COLUMN_ALSOKNOWNAS_NAME)
   private String alsoKnownAs;
 
-  // TODO: Add Avatar
+  @Column(name = DBConstant.USER_COLUMN_AVATAR_NAME)
+  private URI avatar;
 
   // TODO: Add Banner
   // TODO: Decide on Misskey Cat Support

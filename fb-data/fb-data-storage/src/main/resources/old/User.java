@@ -1,5 +1,6 @@
 package old;
 
+import dev.puzzler995.fedibean.data.model.Asset;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -71,8 +72,6 @@ public class User extends DBEntity implements Serializable {
   @Column(name = "is_mod", nullable = false)
   private Boolean isMod = false;
 
-
-
   @Column(name = "inbox")
   private URI inbox;
 
@@ -120,5 +119,4 @@ public class User extends DBEntity implements Serializable {
   @ManyToOne
   @JoinColumn(name = "host_id")
   private Server host;
-
 }

@@ -5,13 +5,12 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import dev.puzzler995.fedibean.activitypub.spec.model.JsonContext;
-import org.springframework.boot.jackson.JsonComponent;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import org.springframework.boot.jackson.JsonComponent;
 
 @JsonComponent
 public class JsonContextListDeserializer extends StdDeserializer<List<JsonContext>> {

@@ -8,30 +8,30 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.reactive.function.client.WebClient;
 
-//@Configuration
+// @Configuration
 public class DataQueueConfig {
-    @Bean
-    public TaskExecutor taskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(5);
-        executor.setMaxPoolSize(15);
-        executor.setThreadNamePrefix("JobProcessor-");
-        executor.initialize();
-        return executor;
-    }
+  @Bean
+  public TaskExecutor taskExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(5);
+    executor.setMaxPoolSize(15);
+    executor.setThreadNamePrefix("JobProcessor-");
+    executor.initialize();
+    return executor;
+  }
 
-    @Bean
-    public WebClient webClient() {
-        return WebClient.builder().build();
-    }
+  @Bean
+  public WebClient webClient() {
+    return WebClient.builder().build();
+  }
 
-    @Bean
-    public JobProcessor processor() {
-        return new JobProcessor();
-    }
+  @Bean
+  public JobProcessor processor() {
+    return new JobProcessor();
+  }
 
-    @Bean
-    public LettuceConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
-    }
+  @Bean
+  public LettuceConnectionFactory redisConnectionFactory() {
+    return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
+  }
 }

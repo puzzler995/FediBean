@@ -17,14 +17,11 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class APMapper {
 
-  @Getter
-  @Autowired
-  private ObjectMapper mapper;
+  @Getter @Autowired private ObjectMapper mapper;
 
   @PostConstruct
   private void testi() {
-    System.out.println("Making mapper"
-    );
+    System.out.println("Making mapper");
   }
 
   public Resolvable deserialize(String json) {

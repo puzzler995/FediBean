@@ -15,8 +15,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import dev.puzzler995.fedibean.activitypub.spec.model.APObject;
 import dev.puzzler995.fedibean.activitypub.spec.model.JsonContext;
 import dev.puzzler995.fedibean.activitypub.spec.model.Resolvable;
-import dev.puzzler995.fedibean.activitypub.spec.modules.jackson.serializer.JsonContextListSerializer;
 import dev.puzzler995.fedibean.activitypub.spec.modules.jackson.deserializer.ResolvableDeserializer;
+import dev.puzzler995.fedibean.activitypub.spec.modules.jackson.serializer.JsonContextListSerializer;
 import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -197,8 +197,7 @@ public class ContextTests {
 
     @Test
     void writeSinglePairAsObject() {
-      List<JsonContext> contexts =
-          List.of(new JsonContext("term1", "definition1"));
+      List<JsonContext> contexts = List.of(new JsonContext("term1", "definition1"));
 
       JsonNode output = objectMapper.valueToTree(contexts);
       assertTrue(output.isObject());
@@ -233,17 +232,17 @@ public class ContextTests {
 
     @Test
     void writeMixedAsArray() {
-        List<JsonContext> contexts =
-            List.of(
-                new JsonContext("https://www.w3.org/ns/activitystreams"),
-                new JsonContext("term1", "definition1"));
+      List<JsonContext> contexts =
+          List.of(
+              new JsonContext("https://www.w3.org/ns/activitystreams"),
+              new JsonContext("term1", "definition1"));
 
-        JsonNode output = objectMapper.valueToTree(contexts);
-        assertTrue(output.isArray());
-        assertTrue(output.get(0).isTextual());
-        assertEquals("https://www.w3.org/ns/activitystreams", output.get(0).asText());
-        assertTrue(output.get(1).isObject());
-        assertEquals("definition1", output.get(1).get("term1").asText());
+      JsonNode output = objectMapper.valueToTree(contexts);
+      assertTrue(output.isArray());
+      assertTrue(output.get(0).isTextual());
+      assertEquals("https://www.w3.org/ns/activitystreams", output.get(0).asText());
+      assertTrue(output.get(1).isObject());
+      assertEquals("definition1", output.get(1).get("term1").asText());
     }
   }
 }

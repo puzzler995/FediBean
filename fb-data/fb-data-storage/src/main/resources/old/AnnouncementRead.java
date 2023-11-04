@@ -1,5 +1,6 @@
 package old;
 
+import dev.puzzler995.fedibean.data.model.Announcement;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,15 +17,14 @@ import org.springframework.data.annotation.CreatedBy;
 @Entity
 @Table(name = "announcement_read")
 public class AnnouncementRead extends DBEntity implements Serializable {
-    private static final long serialVersionUID = -7141417101435623457L;
+  private static final long serialVersionUID = -7141417101435623457L;
 
-    @CreatedBy
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+  @CreatedBy
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "announcement_id", nullable = false)
-    private Announcement announcement;
-
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "announcement_id", nullable = false)
+  private Announcement announcement;
 }

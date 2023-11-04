@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
+import com.google.common.collect.ImmutableList;
 import dev.puzzler995.fedibean.activitypub.spec.model.APObject;
 import dev.puzzler995.fedibean.activitypub.spec.model.Activity;
 import dev.puzzler995.fedibean.activitypub.spec.model.Collection;
@@ -94,11 +95,8 @@ class SerializationTests {
             this.setType("Collection");
             this.setId(new CompactedIri("https://fedibean.example/not/1/replies"));
             this.setItems(
-                new ArrayList<>() {
-                  {
-                    add(new Link("https://mastodon.example/user/someguy/101"));
-                  }
-                });
+                new ArrayList<>(
+                    ImmutableList.of(new Link("https://mastodon.example/user/someguy/101"))));
           }
         };
 
@@ -114,28 +112,23 @@ class SerializationTests {
           {
             this.setType("Note");
             this.setAttachment(
-                new ArrayList<>() {
-                  {
-                    add(
+                new ArrayList<>(
+                    ImmutableList.of(
                         new APObject() {
                           {
                             this.setType("Image");
                           }
-                        });
-                    add(
+                        },
                         new APObject() {
                           {
                             this.setType("Image");
                           }
-                        });
-                    add(
+                        },
                         new APObject() {
                           {
                             this.setType("Image");
                           }
-                        });
-                  }
-                });
+                        })));
           }
         };
     JsonNode actual = objectMapper.valueToTree(obj);
@@ -278,6 +271,5 @@ class SerializationTests {
     JsonNode expected = objectMapper.readTree(json);
     String actualString = mapper.serialize(actualRes);
     JsonNode actual = objectMapper.readTree(actualString);
-    
   }
 }

@@ -15,9 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
 public class LdSignature {
-    private String type;
-    private URI creator;
-    @JsonDeserialize(using = OffsetDateTimeDeserializer.class)
-    private OffsetDateTime created;
-    private String signatureValue;
+  private String type;
+  private URI creator;
+
+  @JsonDeserialize(using = OffsetDateTimeDeserializer.class)
+  private OffsetDateTime created;
+
+  private String signatureValue;
 }

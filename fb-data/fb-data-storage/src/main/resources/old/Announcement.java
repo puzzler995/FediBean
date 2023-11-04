@@ -1,5 +1,6 @@
 package old;
 
+import dev.puzzler995.fedibean.data.model.Asset;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -19,25 +20,24 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Entity
 @Table(name = "announcement")
 public class Announcement extends DBEntity implements Serializable {
-    private static final long serialVersionUID = 8364253152110458587L;
+  private static final long serialVersionUID = 8364253152110458587L;
 
-    @Lob
-    @Column(name = "text", nullable = false)
-    private String text;
+  @Lob
+  @Column(name = "text", nullable = false)
+  private String text;
 
-    @Lob
-    @Column(name = "title", nullable = false)
-    private String title;
+  @Lob
+  @Column(name = "title", nullable = false)
+  private String title;
 
-    @LastModifiedDate
-    @Column(name = "updated_at")
-    private ZonedDateTime updatedAt;
+  @LastModifiedDate
+  @Column(name = "updated_at")
+  private ZonedDateTime updatedAt;
 
-    @Column(name = "show_popup", nullable = false)
-    private Boolean showPopup = false;
+  @Column(name = "show_popup", nullable = false)
+  private Boolean showPopup = false;
 
-    @ManyToOne
-    @JoinColumn(name = "attachment_id")
-    private Asset attachment;
-
+  @ManyToOne
+  @JoinColumn(name = "attachment_id")
+  private Asset attachment;
 }

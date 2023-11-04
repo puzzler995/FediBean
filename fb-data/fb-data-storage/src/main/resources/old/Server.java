@@ -19,14 +19,14 @@ import lombok.experimental.Accessors;
 public class Server extends DBEntity {
   private static final long serialVersionUID = 1708492892575416936L;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+  @Column(name = "name", nullable = false)
+  private String name;
 
-    @Column(name = "host")
-    private URI host;
+  @Column(name = "host")
+  private URI host;
 
-    @Column(name = "is_local", nullable = false)
-    private Boolean isLocal = false;
+  @Column(name = "is_local", nullable = false)
+  private Boolean isLocal = false;
 
   @Column(name = "user_count", nullable = false)
   private Integer userCount;
@@ -85,5 +85,4 @@ public class Server extends DBEntity {
 
   @Column(name = "theme_color")
   private String themeColor;
-
 }

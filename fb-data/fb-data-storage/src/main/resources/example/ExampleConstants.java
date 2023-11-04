@@ -1073,5 +1073,4 @@ public class ExampleConstants {
   public static final String WEBHOOK_COLUMN_LATESTSENTAT_NAME = "\"latestSentAt\"";
   public static final String WEBHOOK_COLUMN_LATESTSTATUS_NAME = "\"latestStatus\"";
   public static final String DRIVEFILE_COLUMN_ASSETPROPERTIES_NAME = "asset_properties";
-
 }

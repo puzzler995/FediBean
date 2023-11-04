@@ -14,8 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -32,44 +32,44 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = ExampleConstants.MESSAGINGMESSAGE_TABLE_NAME)
 public class MessagingMessage implements Serializable {
-    private static final long serialVersionUID = 2699086535762401874L;
-    @Id
-    @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_ID_NAME, nullable = false, length = 32)
-    private String id;
+  private static final long serialVersionUID = 2699086535762401874L;
 
-    @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_CREATEDAT_NAME, nullable = false)
-    private OffsetDateTime createdAt;
+  @Id
+  @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "\"userId\"", nullable = false)
-    private User user;
+  @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "\"recipientId\"")
-    private User recipient;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 
-    @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_TEXT_NAME, length = 4096)
-    private String text;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"recipientId\"")
+  private User recipient;
 
-    @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_ISREAD_NAME, nullable = false)
-    private Boolean isRead = false;
+  @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_TEXT_NAME, length = 4096)
+  private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "\"fileId\"")
-    private DriveFile file;
+  @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_ISREAD_NAME, nullable = false)
+  private Boolean isRead = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "\"groupId\"")
-    private UserGroup group;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"fileId\"")
+  private DriveFile file;
 
-    @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_READS_NAME, nullable = false)
-    private List<String> reads;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"groupId\"")
+  private UserGroup group;
 
-    @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_URI_NAME, length = 512)
-    private String uri;
+  @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_READS_NAME, nullable = false)
+  private List<String> reads;
 
+  @Column(name = ExampleConstants.MESSAGINGMESSAGE_COLUMN_URI_NAME, length = 512)
+  private String uri;
 }

@@ -68,5 +68,4 @@ public class ResolvableDeserializer extends StdDeserializer<Resolvable> {
     }
     return type;
   }
-
 }

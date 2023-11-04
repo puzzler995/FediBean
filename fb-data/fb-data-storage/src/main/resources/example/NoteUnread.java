@@ -1,5 +1,6 @@
 package example;
 
+import dev.puzzler995.fedibean.data.model.Note;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,8 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -30,31 +31,31 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = ExampleConstants.NOTEUNREAD_TABLE_NAME)
 public class NoteUnread implements Serializable {
-    private static final long serialVersionUID = 7021376656690843835L;
-    @Id
-    @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ID_NAME, nullable = false, length = 32)
-    private String id;
+  private static final long serialVersionUID = 7021376656690843835L;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "\"userId\"", nullable = false)
-    private User user;
+  @Id
+  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "\"noteId\"", nullable = false)
-    private Note note;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 
-    @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_NOTEUSERID_NAME, nullable = false, length = 32)
-    private String noteUserId;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"noteId\"", nullable = false)
+  private Note note;
 
-    @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ISSPECIFIED_NAME, nullable = false)
-    private Boolean isSpecified = false;
+  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_NOTEUSERID_NAME, nullable = false, length = 32)
+  private String noteUserId;
 
-    @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ISMENTIONED_NAME, nullable = false)
-    private Boolean isMentioned = false;
+  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ISSPECIFIED_NAME, nullable = false)
+  private Boolean isSpecified = false;
 
-    @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_NOTECHANNELID_NAME, length = 32)
-    private String noteChannelId;
+  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ISMENTIONED_NAME, nullable = false)
+  private Boolean isMentioned = false;
 
+  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_NOTECHANNELID_NAME, length = 32)
+  private String noteChannelId;
 }

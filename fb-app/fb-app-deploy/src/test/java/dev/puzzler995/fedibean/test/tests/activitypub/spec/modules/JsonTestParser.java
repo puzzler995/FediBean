@@ -69,7 +69,7 @@ public class JsonTestParser {
               if (actualFieldValue instanceof String) {
                 assertThat(actualFieldValue).isEqualTo(field.asText());
               } else {
-                //TODO
+                // TODO
               }
             }
           } catch (Exception e) {

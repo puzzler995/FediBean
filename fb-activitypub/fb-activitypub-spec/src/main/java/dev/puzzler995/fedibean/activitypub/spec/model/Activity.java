@@ -67,9 +67,11 @@ public class Activity extends APObject {
 
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> instrument = new ArrayList<>();
+
   @JsonProperty("_misskey_reaction")
   private String misskeyReaction;
-  private  Boolean directMessage;
+
+  private Boolean directMessage;
 
   public Activity addActor(Resolvable actor) {
     this.actor.add(actor);

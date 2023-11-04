@@ -97,7 +97,7 @@ class JsonTests {
       // jsonTestParser.parseJsonTest(this.objectMapper.readTree(json), actual); TODO: Fix this
     } catch (IOException | JSONException e) {
       fail("Failed due to exception: ", e);
-      }
+    }
   }
 
   @Test
@@ -108,13 +108,17 @@ class JsonTests {
       assertThat(actualR).isInstanceOf(Actor.class);
       Actor actual = (Actor) actualR;
       assertThat(actual).isNotNull();
-      assertThat(actual.getFollowing().getId()).hasToString("https://mastodon.example/users/test_actor/following");
-      assertThat(actual.getFollowers().getId()).hasToString("https://mastodon.example/users/test_actor/followers");
-      assertThat(actual.getInbox().getId()).hasToString("https://mastodon.example/users/test_actor/inbox");
-      assertThat(actual.getOutbox().getId()).hasToString("https://mastodon.example/users/test_actor/outbox");
+      assertThat(actual.getFollowing().getId())
+          .hasToString("https://mastodon.example/users/test_actor/following");
+      assertThat(actual.getFollowers().getId())
+          .hasToString("https://mastodon.example/users/test_actor/followers");
+      assertThat(actual.getInbox().getId())
+          .hasToString("https://mastodon.example/users/test_actor/inbox");
+      assertThat(actual.getOutbox().getId())
+          .hasToString("https://mastodon.example/users/test_actor/outbox");
       String actualWrite = this.objectMapper.writeValueAsString(actual);
       JSONAssert.assertEquals(json, actualWrite, false);
-    } catch (IOException |JSONException e) {
+    } catch (IOException | JSONException e) {
       fail("Failed due to exception: ", e);
     }
   }
@@ -146,7 +150,7 @@ class JsonTests {
 
       String actualWrite = this.objectMapper.writeValueAsString(actual);
       JSONAssert.assertEquals(content, actualWrite, false);
-    } catch (IOException |JSONException e) {
+    } catch (IOException | JSONException e) {
       fail("Failed due to exception: ", e);
     }
   }
@@ -160,7 +164,7 @@ class JsonTests {
       assertThat(actualR).isNotNull();
       String actualWrite = this.objectMapper.writeValueAsString(actualR);
       JSONAssert.assertEquals(json, actualWrite, false);
-    } catch (IOException |JSONException e) {
+    } catch (IOException | JSONException e) {
       fail("Failed due to exception: ", e);
     }
   }

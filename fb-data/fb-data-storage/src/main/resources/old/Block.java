@@ -25,5 +25,4 @@ public class Block extends DBEntity {
   @ManyToOne
   @JoinColumn(name = "blockee_id")
   private User blockee;
-
 }

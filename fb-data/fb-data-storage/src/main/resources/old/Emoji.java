@@ -66,5 +66,4 @@ public class Emoji extends DBEntity {
 
   @Column(name = "height")
   private Integer height;
-
 }

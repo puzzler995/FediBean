@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @JsonInclude(Include.NON_EMPTY)
 public class PublicKey {
 
-    private URI id;
-    private URI owner;
-    private String publicKeyPem;
-    private String type;
+  private URI id;
+  private URI owner;
+  private String publicKeyPem;
+  private String type;
 }

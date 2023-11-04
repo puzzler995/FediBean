@@ -1,5 +1,6 @@
 package old;
 
+import dev.puzzler995.fedibean.data.model.Asset;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -56,9 +57,9 @@ public class Note extends DBEntity implements Serializable {
   private String text;
 
   @ManyToMany
-  @JoinTable(name = "note_attachments",
-          joinColumns = @JoinColumn(name = "note_id"),
-          inverseJoinColumns = @JoinColumn(name = "attachments_id"))
+  @JoinTable(
+      name = "note_attachments",
+      joinColumns = @JoinColumn(name = "note_id"),
+      inverseJoinColumns = @JoinColumn(name = "attachments_id"))
   private Set<Asset> attachments = new LinkedHashSet<>();
-
 }

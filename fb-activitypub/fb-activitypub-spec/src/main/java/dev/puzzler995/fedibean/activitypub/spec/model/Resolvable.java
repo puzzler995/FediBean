@@ -29,9 +29,7 @@ public class Resolvable {
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<JsonContext> jsonContext = new ArrayList<>();
 
-  @JsonAnySetter
-  @JsonAnyGetter
-  private Map<String, Object> unknownProperties = new HashMap<>();
+  @JsonAnySetter @JsonAnyGetter private Map<String, Object> unknownProperties = new HashMap<>();
 
   @JsonProperty("@context")
   public List<JsonContext> getJsonContext() {

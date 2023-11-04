@@ -9,22 +9,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JobProcessor {
-    @Autowired
-    private JobQueueService jobQueueService;
+  @Autowired private JobQueueService jobQueueService;
 
-    @Autowired private RedisTemplate<String, Job> redisTemplate;
+  @Autowired private RedisTemplate<String, Job> redisTemplate;
 
-    public void enqueue(Job job) {
-        jobQueueService.enqueue(job);
+  public void enqueue(Job job) {
+    jobQueueService.enqueue(job);
+  }
+
+  @PostConstruct
+  public void startProcessingJobs() {
+    while (true) {
+      Job job = jobQueueService.dequeue();
+      if (job != null) {
+        jobQueueService.processJob(job);
+      }
     }
-
-    @PostConstruct
-    public void startProcessingJobs() {
-        while (true) {
-            Job job = jobQueueService.dequeue();
-            if (job != null) {
-                jobQueueService.processJob(job);
-            }
-        }
-    }
+  }
 }

@@ -1,5 +1,6 @@
 package old;
 
+import dev.puzzler995.fedibean.data.model.Asset;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -20,21 +21,20 @@ import org.springframework.data.annotation.CreatedBy;
 @Entity
 @Table(name = "asset_folder")
 public class AssetFolder extends DBEntity implements Serializable {
-    private static final long serialVersionUID = -4425528262555060756L;
+  private static final long serialVersionUID = -4425528262555060756L;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+  @Column(name = "name", nullable = false)
+  private String name;
 
-    @ManyToOne
-    @CreatedBy
-    @JoinColumn(name = "created_by_id")
-    private User createdBy;
+  @ManyToOne
+  @CreatedBy
+  @JoinColumn(name = "created_by_id")
+  private User createdBy;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private AssetFolder parent;
+  @ManyToOne
+  @JoinColumn(name = "parent_id")
+  private AssetFolder parent;
 
-    @OneToMany(mappedBy = "assetFolder", orphanRemoval = true)
-    private Set<Asset> assets = new LinkedHashSet<>();
-
+  @OneToMany(mappedBy = "assetFolder", orphanRemoval = true)
+  private Set<Asset> assets = new LinkedHashSet<>();
 }

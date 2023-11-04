@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @Import(value = {FedibeanConfig.class})
 public class FediBeanApplication {
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        SpringApplication.run(FediBeanApplication.class, args);
-    }
+    SpringApplication.run(FediBeanApplication.class, args);
+  }
 }

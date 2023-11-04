@@ -1,5 +1,6 @@
 package example;
 
+import dev.puzzler995.fedibean.data.model.Note;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,8 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -31,25 +32,25 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = ExampleConstants.NOTEREACTION_TABLE_NAME)
 public class NoteReaction implements Serializable {
-    private static final long serialVersionUID = 7849301042142267737L;
-    @Id
-    @Column(name = ExampleConstants.NOTEREACTION_COLUMN_ID_NAME, nullable = false, length = 32)
-    private String id;
+  private static final long serialVersionUID = 7849301042142267737L;
 
-    @Column(name = ExampleConstants.NOTEREACTION_COLUMN_CREATEDAT_NAME, nullable = false)
-    private OffsetDateTime createdAt;
+  @Id
+  @Column(name = ExampleConstants.NOTEREACTION_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "\"userId\"", nullable = false)
-    private User user;
+  @Column(name = ExampleConstants.NOTEREACTION_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "\"noteId\"", nullable = false)
-    private Note note;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 
-    @Column(name = ExampleConstants.NOTEREACTION_COLUMN_REACTION_NAME, nullable = false, length = 260)
-    private String reaction;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"noteId\"", nullable = false)
+  private Note note;
 
+  @Column(name = ExampleConstants.NOTEREACTION_COLUMN_REACTION_NAME, nullable = false, length = 260)
+  private String reaction;
 }

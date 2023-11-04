@@ -5,5 +5,5 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import(value = {DataStorageConfig.class})
-//@ComponentScan(basePackageClasses = {DataStorageConfig.class, DataQueueConfig.class})
+// @ComponentScan(basePackageClasses = {DataStorageConfig.class, DataQueueConfig.class})
 public class DataModuleConfig {}

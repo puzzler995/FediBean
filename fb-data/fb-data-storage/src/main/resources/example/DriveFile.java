@@ -14,8 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -126,6 +126,4 @@ public class DriveFile implements Serializable {
 
   @Column(name = ExampleConstants.DRIVEFILE_COLUMN_MAYBEPORN_NAME, nullable = false)
   private Boolean maybePorn = false;
-
-
 }

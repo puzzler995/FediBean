@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
 public class Endpoints {
-    private URI proxyUrl;
-    private URI oauthAuthorizationEndpoint;
-    private URI oauthTokenEndpoint;
-    private URI oauthRegistrationEndpoint;
-    private URI uploadMedia;
-    private URI provideClientKey;
-    private URI signClientKey;
-    private Collection sharedInbox;
+  private URI proxyUrl;
+  private URI oauthAuthorizationEndpoint;
+  private URI oauthTokenEndpoint;
+  private URI oauthRegistrationEndpoint;
+  private URI uploadMedia;
+  private URI provideClientKey;
+  private URI signClientKey;
+  private Collection sharedInbox;
 }

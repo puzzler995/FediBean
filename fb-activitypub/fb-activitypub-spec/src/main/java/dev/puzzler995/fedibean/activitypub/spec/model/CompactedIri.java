@@ -115,7 +115,7 @@ public class CompactedIri {
 
   @Data
   @AllArgsConstructor
-@NoArgsConstructor
+  @NoArgsConstructor
   public static class TryCreateResults {
     private Boolean success;
     private CompactedIri value;

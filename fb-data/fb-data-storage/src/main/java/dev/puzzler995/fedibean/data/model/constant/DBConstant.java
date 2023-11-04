@@ -153,6 +153,7 @@ public final class DBConstant {
   public static final String POLL_COLUMN_CREATED_NAME = "created";
   public static final String POLLCHOICE_COLUMN_ID_NAME = "id";
   public static final String POLLVOTE_COLUMN_CHOICE_NAME = "choice";
+  public static final String USER_COLUMN_AVATAR_NAME = "avatar";
 
   private DBConstant() {}
 }
