@@ -32,17 +32,14 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.PASSWORDRESETREQUEST_TABLE_NAME)
 public class PasswordResetRequest implements Serializable {
   private static final long serialVersionUID = 4183102219402724480L;
-
+  @Column(name = ExampleConstants.PASSWORDRESETREQUEST_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(
       name = ExampleConstants.PASSWORDRESETREQUEST_COLUMN_ID_NAME,
       nullable = false,
       length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.PASSWORDRESETREQUEST_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
   @Column(
       name = ExampleConstants.PASSWORDRESETREQUEST_COLUMN_TOKEN_NAME,
       nullable = false,

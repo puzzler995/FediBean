@@ -17,9 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.jackson.JsonComponent;
 
-@JsonComponent
+//@JsonComponent
 public class CollectionDeserializer extends StdDeserializer<Collection> {
   public CollectionDeserializer() {
     this(Collection.class);

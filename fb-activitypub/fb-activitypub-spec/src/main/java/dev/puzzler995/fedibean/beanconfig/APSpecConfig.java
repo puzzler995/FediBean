@@ -27,7 +27,7 @@ public class APSpecConfig {
             .modules(new JavaTimeModule(), deserializers)
             .featuresToEnable(
                 DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,
-                SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED);
-    // .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+                SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED)
+     .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
   }
 }

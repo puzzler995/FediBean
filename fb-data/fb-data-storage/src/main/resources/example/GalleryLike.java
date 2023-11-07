@@ -32,21 +32,17 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.GALLERYLIKE_TABLE_NAME)
 public class GalleryLike implements Serializable {
   private static final long serialVersionUID = -4380273627579155926L;
-
+  @Column(name = ExampleConstants.GALLERYLIKE_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.GALLERYLIKE_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.GALLERYLIKE_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"", nullable = false)
-  private User user;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"postId\"", nullable = false)
   private GalleryPost post;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 }

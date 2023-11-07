@@ -22,19 +22,15 @@ import org.springframework.data.annotation.CreatedBy;
 @Table(name = "asset_folder")
 public class AssetFolder extends DBEntity implements Serializable {
   private static final long serialVersionUID = -4425528262555060756L;
-
-  @Column(name = "name", nullable = false)
-  private String name;
-
+  @OneToMany(mappedBy = "assetFolder", orphanRemoval = true)
+  private Set<Asset> assets = new LinkedHashSet<>();
   @ManyToOne
   @CreatedBy
   @JoinColumn(name = "created_by_id")
   private User createdBy;
-
+  @Column(name = "name", nullable = false)
+  private String name;
   @ManyToOne
   @JoinColumn(name = "parent_id")
   private AssetFolder parent;
-
-  @OneToMany(mappedBy = "assetFolder", orphanRemoval = true)
-  private Set<Asset> assets = new LinkedHashSet<>();
 }

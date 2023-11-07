@@ -33,25 +33,21 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.ATTESTATIONCHALLENGE_TABLE_NAME)
 public class AttestationChallenge implements Serializable {
   private static final long serialVersionUID = 1848791276019254134L;
-  @EmbeddedId private AttestationChallengeId id;
-
-  @MapsId("userId")
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"", nullable = false)
-  private User user;
-
   @Column(
       name = ExampleConstants.ATTESTATIONCHALLENGE_COLUMN_CHALLENGE_NAME,
       nullable = false,
       length = 64)
   private String challenge;
-
   @Column(name = ExampleConstants.ATTESTATIONCHALLENGE_COLUMN_CREATEDAT_NAME, nullable = false)
   private OffsetDateTime createdAt;
-
+  @EmbeddedId private AttestationChallengeId id;
   @Column(
       name = ExampleConstants.ATTESTATIONCHALLENGE_COLUMN_REGISTRATIONCHALLENGE_NAME,
       nullable = false)
   private Boolean registrationChallenge = false;
+  @MapsId("userId")
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 }

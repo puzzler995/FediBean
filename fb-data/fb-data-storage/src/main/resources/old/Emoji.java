@@ -25,45 +25,33 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Table(name = "emoji")
 public class Emoji extends DBEntity {
   private static final long serialVersionUID = 8151128860949089553L;
-
-  @LastModifiedDate
-  @Column(name = "updated_at")
-  private ZonedDateTime updatedAt;
-
-  @Column(name = "name", nullable = false)
-  private String name;
-
+  @Column(name = "category")
+  private String category;
+  @Column(name = "height")
+  private Integer height;
   @ManyToOne
   @JoinColumn(name = "host_id")
   private Server host;
-
+  @Lob
+  @Column(name = "license")
+  private String license;
+  @Column(name = "name", nullable = false)
+  private String name;
   @Column(name = "original_url", nullable = false)
   private URL originalUrl;
-
-  @Column(name = "uri")
-  private URI uri;
-
-  @Column(name = "type")
-  private String type;
-
+  @Column(name = "public_url", nullable = false)
+  private URL publicUrl;
   @ElementCollection
   @Column(name = "tag")
   @CollectionTable(name = "emoji_tags", joinColumns = @JoinColumn(name = "emoji_id"))
   private List<String> tags = new ArrayList<>();
-
-  @Column(name = "category")
-  private String category;
-
-  @Column(name = "public_url", nullable = false)
-  private URL publicUrl;
-
-  @Lob
-  @Column(name = "license")
-  private String license;
-
+  @Column(name = "type")
+  private String type;
+  @LastModifiedDate
+  @Column(name = "updated_at")
+  private ZonedDateTime updatedAt;
+  @Column(name = "uri")
+  private URI uri;
   @Column(name = "width")
   private Integer width;
-
-  @Column(name = "height")
-  private Integer height;
 }

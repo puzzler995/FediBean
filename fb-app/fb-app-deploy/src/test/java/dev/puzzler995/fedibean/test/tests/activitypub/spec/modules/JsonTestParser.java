@@ -18,8 +18,15 @@ public class JsonTestParser {
 
   @Autowired public ObjectMapper mapper;
 
-  public void parseJsonTest(String expected, Object actualObj) {
-    parseJsonTest(mapper.valueToTree(expected), actualObj);
+  public void parseJsonArrayTest(JsonNode expectedNode, List<Object> actualArray) {
+    if (expectedNode.isArray()) {
+      int arraySize = expectedNode.size();
+      List<Object> elements = actualArray;
+      assertThat(elements.size()).isEqualTo(arraySize);
+      for (int i = 0; i < arraySize; i++) {
+        parseJsonTest(expectedNode.get(i), elements.get(i));
+      }
+    }
   }
 
   public void parseJsonTest(JsonNode expectedObj, Object actualObj) {
@@ -89,14 +96,7 @@ public class JsonTestParser {
     }
   }
 
-  public void parseJsonArrayTest(JsonNode expectedNode, List<Object> actualArray) {
-    if (expectedNode.isArray()) {
-      int arraySize = expectedNode.size();
-      List<Object> elements = actualArray;
-      assertThat(elements.size()).isEqualTo(arraySize);
-      for (int i = 0; i < arraySize; i++) {
-        parseJsonTest(expectedNode.get(i), elements.get(i));
-      }
-    }
+  public void parseJsonTest(String expected, Object actualObj) {
+    parseJsonTest(mapper.valueToTree(expected), actualObj);
   }
 }

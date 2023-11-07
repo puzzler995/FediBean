@@ -21,17 +21,14 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = DBConstant.POLLVOTE_TABLE_NAME)
 public class PollVote extends DBItem {
   private static final long serialVersionUID = 6889308556785567755L;
-
-  @ManyToOne(optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "user_id", nullable = false)
-  private User user;
-
+  @Column(name = DBConstant.POLLVOTE_COLUMN_CHOICE_NAME, nullable = false)
+  private Integer choice;
   @ManyToOne(optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "note_id", nullable = false)
   private Note note;
-
-  @Column(name = DBConstant.POLLVOTE_COLUMN_CHOICE_NAME, nullable = false)
-  private Integer choice;
+  @ManyToOne(optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 }

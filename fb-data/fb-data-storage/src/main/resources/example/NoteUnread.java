@@ -36,26 +36,20 @@ public class NoteUnread implements Serializable {
   @Id
   @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"", nullable = false)
-  private User user;
-
+  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ISMENTIONED_NAME, nullable = false)
+  private Boolean isMentioned = false;
+  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ISSPECIFIED_NAME, nullable = false)
+  private Boolean isSpecified = false;
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"noteId\"", nullable = false)
   private Note note;
-
-  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_NOTEUSERID_NAME, nullable = false, length = 32)
-  private String noteUserId;
-
-  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ISSPECIFIED_NAME, nullable = false)
-  private Boolean isSpecified = false;
-
-  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_ISMENTIONED_NAME, nullable = false)
-  private Boolean isMentioned = false;
-
   @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_NOTECHANNELID_NAME, length = 32)
   private String noteChannelId;
+  @Column(name = ExampleConstants.NOTEUNREAD_COLUMN_NOTEUSERID_NAME, nullable = false, length = 32)
+  private String noteUserId;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 }

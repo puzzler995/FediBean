@@ -26,20 +26,15 @@ import lombok.Setter;
 @Table(name = ExampleConstants.CHARTDAYAPREQUEST_TABLE_NAME)
 public class ChartDayApRequest implements Serializable {
   private static final long serialVersionUID = 7837930608257823849L;
-
+  @Column(name = ExampleConstants.CHARTDAYAPREQUEST_COLUMN_DATE_NAME, nullable = false)
+  private Integer date;
+  @Column(name = ExampleConstants.CHARTDAYAPREQUEST_COLUMN_DELIVERFAILED_NAME, nullable = false)
+  private Integer deliverfailed;
+  @Column(name = ExampleConstants.CHARTDAYAPREQUEST_COLUMN_DELIVERSUCCEEDED_NAME, nullable = false)
+  private Integer deliversucceeded;
   @Id
   @Column(name = ExampleConstants.CHARTDAYAPREQUEST_COLUMN_ID_NAME, nullable = false)
   private Integer id;
-
-  @Column(name = ExampleConstants.CHARTDAYAPREQUEST_COLUMN_DATE_NAME, nullable = false)
-  private Integer date;
-
-  @Column(name = ExampleConstants.CHARTDAYAPREQUEST_COLUMN_DELIVERFAILED_NAME, nullable = false)
-  private Integer deliverfailed;
-
-  @Column(name = ExampleConstants.CHARTDAYAPREQUEST_COLUMN_DELIVERSUCCEEDED_NAME, nullable = false)
-  private Integer deliversucceeded;
-
   @Column(name = ExampleConstants.CHARTDAYAPREQUEST_COLUMN_INBOXRECEIVED_NAME, nullable = false)
   private Integer inboxreceived;
 }

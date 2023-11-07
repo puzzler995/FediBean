@@ -11,11 +11,17 @@ import com.vaadin.flow.theme.lumo.LumoUtility.FontSize;
 import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
+// @Route
 public class MainView extends AppLayout {
 
   public MainView() {
     setPrimarySection(Section.DRAWER);
     addDrawerContent();
+  }
+
+  @Override
+  protected void afterNavigation() {
+    super.afterNavigation();
   }
 
   private void addDrawerContent() {
@@ -26,22 +32,17 @@ public class MainView extends AppLayout {
     addToDrawer(header, scroller, createFooter());
   }
 
-  private SideNav createNavigation() {
-    SideNav sideNav = new SideNav();
-    sideNav.addItem(new SideNavItem("Home", FeedView.class, LineAwesomeIcon.HOME_SOLID.create()));
-    //    sideNav.addItem(new SideNavItem("About", AboutView.class,
-    // LineAwesomeIcon.INFO_CIRCLE_SOLID));
-    return sideNav;
-  }
-
   private Footer createFooter() {
     Footer footer = new Footer();
     footer.setText("FediBean is a federated social network based on Java and Spring Boot");
     return footer;
   }
 
-  @Override
-  protected void afterNavigation() {
-    super.afterNavigation();
+  private SideNav createNavigation() {
+    SideNav sideNav = new SideNav();
+    sideNav.addItem(new SideNavItem("feed", FeedView.class, LineAwesomeIcon.HOME_SOLID.create()));
+    //    sideNav.addItem(new SideNavItem("About", AboutView.class,
+    // LineAwesomeIcon.INFO_CIRCLE_SOLID));
+    return sideNav;
   }
 }

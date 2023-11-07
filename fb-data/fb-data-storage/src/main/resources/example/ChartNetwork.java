@@ -26,26 +26,19 @@ import lombok.Setter;
 @Table(name = ExampleConstants.CHARTNETWORK_TABLE_NAME)
 public class ChartNetwork implements Serializable {
   private static final long serialVersionUID = -3859783556896256280L;
-
+  @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_DATE_NAME, nullable = false)
+  private Integer date;
   @Id
   @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_ID_NAME, nullable = false)
   private Integer id;
-
-  @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_DATE_NAME, nullable = false)
-  private Integer date;
-
-  @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_INCOMINGREQUESTS_NAME, nullable = false)
-  private Integer incomingrequests;
-
-  @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_OUTGOINGREQUESTS_NAME, nullable = false)
-  private Integer outgoingrequests;
-
-  @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_TOTALTIME_NAME, nullable = false)
-  private Integer totaltime;
-
   @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_INCOMINGBYTES_NAME, nullable = false)
   private Integer incomingbytes;
-
+  @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_INCOMINGREQUESTS_NAME, nullable = false)
+  private Integer incomingrequests;
   @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_OUTGOINGBYTES_NAME, nullable = false)
   private Integer outgoingbytes;
+  @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_OUTGOINGREQUESTS_NAME, nullable = false)
+  private Integer outgoingrequests;
+  @Column(name = ExampleConstants.CHARTNETWORK_COLUMN_TOTALTIME_NAME, nullable = false)
+  private Integer totaltime;
 }

@@ -21,17 +21,14 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = DBConstant.NOTEREACTION_TABLE_NAME)
 public class NoteReaction extends DBItem {
   private static final long serialVersionUID = 3815754165392134000L;
-
-  @ManyToOne(optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "user_id", nullable = false)
-  private User user;
-
+  @Column(name = DBConstant.NOTEREACTION_COLUMN_EMOJITEXT_NAME1, nullable = false)
+  private String emojiText;
   @ManyToOne(optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "note_id", nullable = false)
   private Note note;
-
-  @Column(name = DBConstant.NOTEREACTION_COLUMN_EMOJITEXT_NAME1, nullable = false)
-  private String emojiText;
+  @ManyToOne(optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 }

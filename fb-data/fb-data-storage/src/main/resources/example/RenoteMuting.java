@@ -27,14 +27,11 @@ import lombok.Setter;
 @Table(name = ExampleConstants.RENOTEMUTING_TABLE_NAME)
 public class RenoteMuting implements Serializable {
   private static final long serialVersionUID = -8378695648450891768L;
-
+  @Column(name = ExampleConstants.RENOTEMUTING_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.RENOTEMUTING_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.RENOTEMUTING_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
   @Column(name = ExampleConstants.RENOTEMUTING_COLUMN_MUTEEID_NAME, nullable = false, length = 32)
   private String muteeId;
 

@@ -8,9 +8,8 @@ import dev.puzzler995.fedibean.activitypub.spec.model.ContentMap;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import org.springframework.boot.jackson.JsonComponent;
 
-@JsonComponent
+//@JsonComponent
 public class ContentMapDeserializer extends StdDeserializer<ContentMap> {
   public ContentMapDeserializer() {
     this(ContentMap.class);

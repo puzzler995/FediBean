@@ -34,7 +34,7 @@ public class ResolvableDeserializer extends StdDeserializer<Resolvable> {
       String href = node.asText();
       value = href != null ? new Link(href) : null;
     }
-    if (node.has("type")) {
+    if (node.has("@type")) {
       value = deserializeByType(node, p.getCodec());
     }
     if (value == null && node.has("href")) {
@@ -45,7 +45,7 @@ public class ResolvableDeserializer extends StdDeserializer<Resolvable> {
   }
 
   private Resolvable deserializeByType(JsonNode node, ObjectCodec codec) throws IOException {
-    JsonNode typeNode = node.get("type");
+    JsonNode typeNode = node.get("@type");
     if (typeNode.isArray() || typeNode.isTextual()) {
       List<String> type = getTypeList(typeNode);
       Class<? extends Resolvable> resolvedClass =
@@ -61,10 +61,18 @@ public class ResolvableDeserializer extends StdDeserializer<Resolvable> {
     List<String> type = new ArrayList<>();
     if (typeNode.isArray()) {
       for (JsonNode typeEntry : typeNode) {
-        type.add(typeEntry.asText());
+        String t = typeEntry.asText().substring(typeEntry.asText().lastIndexOf("#") + 1);
+        if (t == null) {
+          t = typeEntry.asText().substring(typeEntry.asText().lastIndexOf("/") + 1);
+        }
+        type.add(t);
       }
     } else if (typeNode.isTextual()) {
-      type.add(typeNode.asText());
+      String t = typeNode.asText().substring(typeNode.asText().lastIndexOf("#") + 1);
+      if (t == null) {
+        t = typeNode.asText().substring(typeNode.asText().lastIndexOf("/") + 1);
+      }
+      type.add(t);
     }
     return type;
   }

@@ -7,7 +7,7 @@ import dev.puzzler995.fedibean.activitypub.spec.model.CompactedIri;
 import java.io.IOException;
 import org.springframework.boot.jackson.JsonComponent;
 
-@JsonComponent
+//@JsonComponent
 public class CompactedIriSerializer extends JsonSerializer<CompactedIri> {
   @Override
   public void serialize(CompactedIri value, JsonGenerator generator, SerializerProvider serializers)

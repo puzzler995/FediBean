@@ -8,20 +8,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import dev.puzzler995.fedibean.activitypub.spec.model.Link;
 import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.jackson.JsonComponent;
 
-@JsonComponent
+//@JsonComponent
 public class LinkSerializer extends JsonSerializer<Link> {
-
-  private boolean isSimpleLink(Link value) {
-    return value.getHref() != null
-        && value.getRel() == null
-        && value.getMediaType() == null
-        && value.getName() == null
-        && value.getHreflang() == null
-        && value.getHeight() == null
-        && value.getWidth() == null;
-  }
 
   @Override
   public void serialize(Link value, JsonGenerator gen, SerializerProvider serializers)
@@ -47,9 +36,19 @@ public class LinkSerializer extends JsonSerializer<Link> {
             && !StringUtils.equalsIgnoreCase(value.getHref().toString(), value.getId().toString()))
           writeIfNotNull(gen, "id", value.getId().toString());
         if (value.getType() != null) writeIfNotNull(gen, "type", value.getType());
-        if (value.getJsonContext() != null) writeIfNotNull(gen, "@context", value.getJsonContext());
+        //if (value.getJsonContext() != null) writeIfNotNull(gen, "@context", value.getJsonContext());
         gen.writeEndObject();
       }
     }
+  }
+
+  private boolean isSimpleLink(Link value) {
+    return value.getHref() != null
+        && value.getRel() == null
+        && value.getMediaType() == null
+        && value.getName() == null
+        && value.getHreflang() == null
+        && value.getHeight() == null
+        && value.getWidth() == null;
   }
 }

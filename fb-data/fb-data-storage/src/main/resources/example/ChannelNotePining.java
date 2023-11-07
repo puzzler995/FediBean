@@ -33,19 +33,15 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.CHANNELNOTEPINING_TABLE_NAME)
 public class ChannelNotePining implements Serializable {
   private static final long serialVersionUID = 5074319119348221742L;
-
-  @Id
-  @Column(name = ExampleConstants.CHANNELNOTEPINING_COLUMN_ID_NAME, nullable = false, length = 32)
-  private String id;
-
-  @Column(name = ExampleConstants.CHANNELNOTEPINING_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"channelId\"", nullable = false)
   private Channel channel;
-
+  @Column(name = ExampleConstants.CHANNELNOTEPINING_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Id
+  @Column(name = ExampleConstants.CHANNELNOTEPINING_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"noteId\"", nullable = false)

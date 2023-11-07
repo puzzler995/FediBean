@@ -21,8 +21,8 @@ import lombok.ToString;
 @JsonDeserialize(using = CollectionDeserializer.class)
 @JsonSerialize(using = CollectionSerializer.class)
 public class CollectionPage extends Collection {
-  private Resolvable partOf;
   private Resolvable next;
+  private Resolvable partOf;
   private Resolvable prev;
   private Integer startIndex;
 }

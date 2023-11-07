@@ -34,20 +34,16 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.PROMONOTE_TABLE_NAME)
 public class PromoNote implements Serializable {
   private static final long serialVersionUID = -2937301961797670659L;
-
-  @Id
-  @Column(name = ExampleConstants.PROMONOTE_COLUMN_NOTEID_NAME, nullable = false, length = 32)
-  private String noteId;
-
+  @Column(name = ExampleConstants.PROMONOTE_COLUMN_EXPIRESAT_NAME, nullable = false)
+  private OffsetDateTime expiresAt;
   @MapsId
   @OneToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"noteId\"", nullable = false)
   private Note note;
-
-  @Column(name = ExampleConstants.PROMONOTE_COLUMN_EXPIRESAT_NAME, nullable = false)
-  private OffsetDateTime expiresAt;
-
+  @Id
+  @Column(name = ExampleConstants.PROMONOTE_COLUMN_NOTEID_NAME, nullable = false, length = 32)
+  private String noteId;
   @Column(name = ExampleConstants.PROMONOTE_COLUMN_USERID_NAME, nullable = false, length = 32)
   private String userId;
 }

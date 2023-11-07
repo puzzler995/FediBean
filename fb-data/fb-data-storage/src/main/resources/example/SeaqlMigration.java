@@ -26,14 +26,12 @@ import lombok.Setter;
 @Table(name = ExampleConstants.SEAQLMIGRATION_TABLE_NAME)
 public class SeaqlMigration implements Serializable {
   private static final long serialVersionUID = 411406222779434893L;
-
+  @Column(name = ExampleConstants.SEAQLMIGRATION_COLUMN_APPLIEDAT_NAME, nullable = false)
+  private Long appliedAt;
   @Id
   @Column(
       name = ExampleConstants.SEAQLMIGRATION_COLUMN_VERSION_NAME,
       nullable = false,
       length = Integer.MAX_VALUE)
   private String version;
-
-  @Column(name = ExampleConstants.SEAQLMIGRATION_COLUMN_APPLIEDAT_NAME, nullable = false)
-  private Long appliedAt;
 }

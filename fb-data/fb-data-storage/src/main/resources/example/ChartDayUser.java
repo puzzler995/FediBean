@@ -28,30 +28,22 @@ import lombok.Setter;
 @Table(name = ExampleConstants.CHARTDAYUSER_TABLE_NAME)
 public class ChartDayUser implements Serializable {
   private static final long serialVersionUID = -7093053496699090009L;
-
+  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_DATE_NAME, nullable = false)
+  private Integer date;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_ID_NAME, nullable = false)
   private Integer id;
-
-  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_DATE_NAME, nullable = false)
-  private Integer date;
-
-  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_LOCALTOTAL_NAME, nullable = false)
-  private Integer localTotal;
-
-  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_LOCALINC_NAME, nullable = false)
-  private Short localInc;
-
   @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_LOCALDEC_NAME, nullable = false)
   private Short localDec;
-
-  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_REMOTETOTAL_NAME, nullable = false)
-  private Integer remoteTotal;
-
-  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_REMOTEINC_NAME, nullable = false)
-  private Short remoteInc;
-
+  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_LOCALINC_NAME, nullable = false)
+  private Short localInc;
+  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_LOCALTOTAL_NAME, nullable = false)
+  private Integer localTotal;
   @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_REMOTEDEC_NAME, nullable = false)
   private Short remoteDec;
+  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_REMOTEINC_NAME, nullable = false)
+  private Short remoteInc;
+  @Column(name = ExampleConstants.CHARTDAYUSER_COLUMN_REMOTETOTAL_NAME, nullable = false)
+  private Integer remoteTotal;
 }

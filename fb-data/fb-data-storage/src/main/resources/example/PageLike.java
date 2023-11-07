@@ -32,21 +32,17 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.PAGELIKE_TABLE_NAME)
 public class PageLike implements Serializable {
   private static final long serialVersionUID = 2697674383409501493L;
-
+  @Column(name = ExampleConstants.PAGELIKE_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.PAGELIKE_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.PAGELIKE_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"", nullable = false)
-  private User user;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"pageId\"", nullable = false)
   private Page page;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 }

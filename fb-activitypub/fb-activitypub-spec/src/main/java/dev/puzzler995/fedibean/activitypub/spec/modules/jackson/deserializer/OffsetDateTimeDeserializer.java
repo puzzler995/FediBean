@@ -16,15 +16,19 @@ public class OffsetDateTimeDeserializer extends JsonDeserializer<OffsetDateTime>
   public OffsetDateTime deserialize(JsonParser p, DeserializationContext context)
       throws IOException {
     JsonNode node = p.getCodec().readTree(p);
+    String value = "";
     if (node.isTextual()) {
-      String dateStr = node.asText();
-      try {
-        return OffsetDateTime.parse(dateStr, DateTimeFormatter.ISO_ZONED_DATE_TIME);
-      } catch (Exception e) {
-        return LocalDateTime.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-            .atOffset(OffsetDateTime.now().getOffset());
-      }
+      value = node.asText();
+    } else if (node.isObject()) {
+      value = node.get("@value").asText();
+    } else {
+      throw new IllegalArgumentException("Invalid OffsetDateTime format: " + node);
     }
-    throw new IllegalArgumentException("Invalid OffsetDateTime format: " + node);
+    try {
+      return OffsetDateTime.parse(value, DateTimeFormatter.ISO_ZONED_DATE_TIME);
+    } catch (Exception e) {
+      return LocalDateTime.parse(value, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+          .atOffset(OffsetDateTime.now().getOffset());
+    }
   }
 }

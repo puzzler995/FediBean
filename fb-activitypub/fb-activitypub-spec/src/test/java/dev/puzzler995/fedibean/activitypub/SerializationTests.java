@@ -15,7 +15,6 @@ import dev.puzzler995.fedibean.activitypub.spec.model.APObject;
 import dev.puzzler995.fedibean.activitypub.spec.model.Activity;
 import dev.puzzler995.fedibean.activitypub.spec.model.Collection;
 import dev.puzzler995.fedibean.activitypub.spec.model.CompactedIri;
-import dev.puzzler995.fedibean.activitypub.spec.model.JsonContext;
 import dev.puzzler995.fedibean.activitypub.spec.model.Link;
 import dev.puzzler995.fedibean.activitypub.spec.model.Resolvable;
 import dev.puzzler995.fedibean.activitypub.spec.modules.APMapper;
@@ -41,6 +40,24 @@ class SerializationTests {
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
   @Autowired private APMapper mapper;
+
+  private static Stream<Integer> fileNumbersProvider() {
+    return IntStream.range(0, 159).boxed();
+  }
+
+  private static String readResource(String name) throws IOException {
+    ClassLoader classLoader = DeserializationTests.class.getClassLoader();
+    InputStream inputStream = classLoader.getResourceAsStream(name);
+    String jsonContent = "";
+    if (inputStream != null) {
+      try {
+        jsonContent = IOUtils.toString(inputStream);
+      } finally {
+        inputStream.close();
+      }
+    }
+    return jsonContent;
+  }
 
   private static Stream<Arguments> realWorldActivities() {
     return Stream.of(
@@ -69,40 +86,31 @@ class SerializationTests {
         Arguments.of("mastodon_update_note.json", "Update"));
   }
 
-  private static String readResource(String name) throws IOException {
-    ClassLoader classLoader = DeserializationTests.class.getClassLoader();
-    InputStream inputStream = classLoader.getResourceAsStream(name);
-    String jsonContent = "";
-    if (inputStream != null) {
-      try {
-        jsonContent = IOUtils.toString(inputStream);
-      } finally {
-        inputStream.close();
-      }
-    }
-    return jsonContent;
-  }
-
-  private static Stream<Integer> fileNumbersProvider() {
-    return IntStream.range(0, 159).boxed();
-  }
-
   @Test
-  void serializeCollection() throws JsonProcessingException {
-    Collection collection =
-        new Collection() {
+  void excludesNull() {
+    APObject obj =
+        new APObject() {
           {
-            this.setType("Collection");
-            this.setId(new CompactedIri("https://fedibean.example/not/1/replies"));
-            this.setItems(
-                new ArrayList<>(
-                    ImmutableList.of(new Link("https://mastodon.example/user/someguy/101"))));
+            this.setContent("test content");
+            this.setId(new CompactedIri("https://fedibean.example/1"));
+            this.setType("Note");
           }
         };
+    JsonNode actual = objectMapper.valueToTree(obj);
+    assertNull(actual.get("bto"));
+    assertNull(actual.get("null"));
+    assertEquals("test content", actual.get("content").asText());
+    // TODO: assertEquals("test content, actual);???
+  }
 
-    String actual = mapper.serialize(collection);
-    //    String actual = objectMapper.writeValueAsString(collection);
-    assertNotNull(actual);
+  @ParameterizedTest
+  @MethodSource({"realWorldActivities"})
+  void realWorldTestActivity(String filename) throws IOException {
+    String json = readResource(filename);
+    Resolvable actualRes = mapper.deserialize(json);
+    JsonNode expected = objectMapper.readTree(json);
+    String actualString = mapper.serialize(actualRes);
+    JsonNode actual = objectMapper.readTree(actualString);
   }
 
   @Test
@@ -137,48 +145,21 @@ class SerializationTests {
   }
 
   @Test
-  void serializeMediaType() {
-    APObject obj =
-        new APObject() {
+  void serializeCollection() throws JsonProcessingException {
+    Collection collection =
+        new Collection() {
           {
-            this.setType("Image");
-            this.setMediaType("image/jpeg");
+            this.setType("Collection");
+            this.setId(new CompactedIri("https://fedibean.example/not/1/replies"));
+            this.setItems(
+                new ArrayList<>(
+                    ImmutableList.of(new Link("https://mastodon.example/user/someguy/101"))));
           }
         };
-    JsonNode actual = objectMapper.valueToTree(obj);
-    assertEquals("image/jpeg", actual.get("mediaType").asText());
-  }
 
-  @Test
-  void serializeSimpleObject() {
-    APObject obj =
-        new APObject() {
-          {
-            this.setType("Object");
-            this.setContent("test content");
-            this.setId(new CompactedIri("https://fedibean.example/1"));
-          }
-        };
-    JsonNode actual = objectMapper.valueToTree(obj);
-    assertEquals("test content", actual.get("content").asText());
-    // TODO: assertEquals("https://fedibean.example/1", actual);???
-  }
-
-  @Test
-  void excludesNull() {
-    APObject obj =
-        new APObject() {
-          {
-            this.setContent("test content");
-            this.setId(new CompactedIri("https://fedibean.example/1"));
-            this.setType("Note");
-          }
-        };
-    JsonNode actual = objectMapper.valueToTree(obj);
-    assertNull(actual.get("bto"));
-    assertNull(actual.get("null"));
-    assertEquals("test content", actual.get("content").asText());
-    // TODO: assertEquals("test content, actual);???
+    String actual = mapper.serialize(collection);
+    //    String actual = objectMapper.writeValueAsString(collection);
+    assertNotNull(actual);
   }
 
   @Test
@@ -191,8 +172,8 @@ class SerializationTests {
             this.setType("Note");
           }
         };
-    obj.addJsonContext(JsonContext.activityStreams);
-    obj.addJsonContext(new JsonContext("toot", "https://mastodon.example/schema#"));
+    //obj.addJsonContext(JsonContext.activityStreams);
+    //obj.addJsonContext(new JsonContext("toot", "https://mastodon.example/schema#"));
     JsonNode actual = objectMapper.valueToTree(obj);
     JsonNode context = actual.get("@context");
     JSONAssert.assertEquals(
@@ -202,19 +183,39 @@ class SerializationTests {
   }
 
   @Test
-  void serializeSingleJsonContext() throws JsonProcessingException {
+  void serializeLinksAsObject_WhenPropertiesAreSet() {
+    Link link =
+        new Link("https://example.com") {
+          {
+            this.setRel(Collections.singletonList("me"));
+          }
+        };
+    JsonNode actual = objectMapper.valueToTree(link);
+    assertEquals(JsonNodeType.OBJECT, actual.getNodeType());
+    assertTrue(actual.has("href"));
+    assertEquals("https://example.com", actual.get("href").asText());
+    assertTrue(actual.has("rel"));
+    assertEquals("me", actual.get("rel").asText());
+  }
+
+  @Test
+  void serializeLinksAsString_WhenOnlyHrefIsSet() throws JsonProcessingException {
+    Link link = new Link("https://example.com");
+    String actual = objectMapper.writeValueAsString(link);
+    assertEquals("\"https://example.com\"", actual);
+  }
+
+  @Test
+  void serializeMediaType() {
     APObject obj =
         new APObject() {
           {
-            this.setContent("test content");
-            this.setId(new CompactedIri("https://fedibean.example/1"));
-            this.setType("Note");
+            this.setType("Image");
+            this.setMediaType("image/jpeg");
           }
         };
-    obj.addJsonContext(JsonContext.activityStreams);
-    String actual = objectMapper.writeValueAsString(obj);
-    assertNotNull(actual);
-    assertTrue(actual.contains("\"@context\":[\"https://www.w3.org/ns/activitystreams\"]"));
+    JsonNode actual = objectMapper.valueToTree(obj);
+    assertEquals("image/jpeg", actual.get("mediaType").asText());
   }
 
   @Test
@@ -241,35 +242,33 @@ class SerializationTests {
   }
 
   @Test
-  void serializeLinksAsString_WhenOnlyHrefIsSet() throws JsonProcessingException {
-    Link link = new Link("https://example.com");
-    String actual = objectMapper.writeValueAsString(link);
-    assertEquals("\"https://example.com\"", actual);
+  void serializeSimpleObject() {
+    APObject obj =
+        new APObject() {
+          {
+            this.setType("Object");
+            this.setContent("test content");
+            this.setId(new CompactedIri("https://fedibean.example/1"));
+          }
+        };
+    JsonNode actual = objectMapper.valueToTree(obj);
+    assertEquals("test content", actual.get("content").asText());
+    // TODO: assertEquals("https://fedibean.example/1", actual);???
   }
 
   @Test
-  void serializeLinksAsObject_WhenPropertiesAreSet() {
-    Link link =
-        new Link("https://example.com") {
+  void serializeSingleJsonContext() throws JsonProcessingException {
+    APObject obj =
+        new APObject() {
           {
-            this.setRel(Collections.singletonList("me"));
+            this.setContent("test content");
+            this.setId(new CompactedIri("https://fedibean.example/1"));
+            this.setType("Note");
           }
         };
-    JsonNode actual = objectMapper.valueToTree(link);
-    assertEquals(JsonNodeType.OBJECT, actual.getNodeType());
-    assertTrue(actual.has("href"));
-    assertEquals("https://example.com", actual.get("href").asText());
-    assertTrue(actual.has("rel"));
-    assertEquals("me", actual.get("rel").asText());
-  }
-
-  @ParameterizedTest
-  @MethodSource({"realWorldActivities"})
-  void realWorldTestActivity(String filename) throws IOException {
-    String json = readResource(filename);
-    Resolvable actualRes = mapper.deserialize(json);
-    JsonNode expected = objectMapper.readTree(json);
-    String actualString = mapper.serialize(actualRes);
-    JsonNode actual = objectMapper.readTree(actualString);
+    //obj.addJsonContext(JsonContext.activityStreams);
+    String actual = objectMapper.writeValueAsString(obj);
+    assertNotNull(actual);
+    assertTrue(actual.contains("\"@context\":[\"https://www.w3.org/ns/activitystreams\"]"));
   }
 }

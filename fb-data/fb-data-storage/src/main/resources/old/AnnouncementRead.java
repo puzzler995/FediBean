@@ -18,13 +18,11 @@ import org.springframework.data.annotation.CreatedBy;
 @Table(name = "announcement_read")
 public class AnnouncementRead extends DBEntity implements Serializable {
   private static final long serialVersionUID = -7141417101435623457L;
-
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "announcement_id", nullable = false)
+  private Announcement announcement;
   @CreatedBy
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
-
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "announcement_id", nullable = false)
-  private Announcement announcement;
 }

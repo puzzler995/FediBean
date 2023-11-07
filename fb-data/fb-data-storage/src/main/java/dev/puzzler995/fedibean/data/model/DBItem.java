@@ -24,13 +24,11 @@ import org.springframework.data.annotation.CreatedDate;
 @MappedSuperclass
 public class DBItem implements Serializable {
   private static final long serialVersionUID = -1100343759994222415L;
-
+  @CreatedDate
+  @Column(name = DBConstant.DBITEM_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = DBConstant.DBITEM_COLUMN_ID_NAME, nullable = false)
   private UUID id;
-
-  @CreatedDate
-  @Column(name = DBConstant.DBITEM_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
 }

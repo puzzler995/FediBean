@@ -16,10 +16,8 @@ import lombok.Setter;
 @Embeddable
 public class NoteReactionType implements Serializable {
   private static final long serialVersionUID = -8802019744271307962L;
-
-  @Column(name = DBConstant.NOTEREACTION_COLUMN_EMOJITEXT_NAME, nullable = false)
-  private String emojiText;
-
   @Column(name = DBConstant.NOTEREACTION_COLUMN_COUNT_NAME, nullable = false)
   private Short count;
+  @Column(name = DBConstant.NOTEREACTION_COLUMN_EMOJITEXT_NAME, nullable = false)
+  private String emojiText;
 }

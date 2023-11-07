@@ -36,31 +36,23 @@ import org.hibernate.type.SqlTypes;
 @Table(name = ExampleConstants.REGISTRYITEM_TABLE_NAME)
 public class RegistryItem implements Serializable {
   private static final long serialVersionUID = 622726751324543166L;
-
+  @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_DOMAIN_NAME, length = 512)
+  private String domain;
   @Id
   @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
+  @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_KEY_NAME, nullable = false, length = 1024)
+  private String key;
+  @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_SCOPE_NAME, nullable = false)
+  private List<String> scope;
   @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_UPDATEDAT_NAME, nullable = false)
   private OffsetDateTime updatedAt;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)
   private User user;
-
-  @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_KEY_NAME, nullable = false, length = 1024)
-  private String key;
-
-  @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_SCOPE_NAME, nullable = false)
-  private List<String> scope;
-
-  @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_DOMAIN_NAME, length = 512)
-  private String domain;
-
   @Column(name = ExampleConstants.REGISTRYITEM_COLUMN_VALUE_NAME)
   @JdbcTypeCode(SqlTypes.JSON)
   private Map<String, Object> value;

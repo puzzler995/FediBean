@@ -32,79 +32,57 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = DBConstant.ASSET_TABLE_NAME)
 public class Asset extends DBItem implements Serializable {
   @Serial private static final long serialVersionUID = -3447416019399923146L;
-
-  @ManyToOne
-  @OnDelete(action = OnDeleteAction.SET_NULL)
-  @JoinColumn(name = "owner_id")
-  private User owner;
-
-  @Column(name = DBConstant.ASSET_COLUMN_MD5_NAME, nullable = false)
-  private String md5;
-
-  @Column(name = DBConstant.ASSET_COLUMN_NAME_NAME, nullable = false)
-  private String name;
-
-  @Column(name = DBConstant.ASSET_COLUMN_TYPE_NAME, nullable = false)
-  private String type;
-
-  @Column(name = DBConstant.ASSET_COLUMN_SIZE_NAME, nullable = false)
-  private Integer size;
-
+  @Column(name = DBConstant.ASSET_COLUMN_ACCESSKEY_NAME)
+  private String accessKey;
+  @ElementCollection
+  @CollectionTable(name = "asset_assetProperty", joinColumns = @JoinColumn(name = "owner_id"))
+  private List<AssetProperty> assetProperties = new ArrayList<>();
+  @Column(name = DBConstant.ASSET_COLUMN_BLURHASH_NAME)
+  private String blurhash;
   @Lob
   @Column(name = DBConstant.ASSET_COLUMN_COMMENT_NAME)
   private String comment;
-
-  @Column(name = DBConstant.ASSET_COLUMN_STOREDINTERNAL_NAME, nullable = false)
-  private Boolean storedInternal = false;
-
-  @Column(name = DBConstant.ASSET_COLUMN_URL_NAME, nullable = false, length = 512)
-  private URL url;
-
-  @Column(name = DBConstant.ASSET_COLUMN_THUMBNAILURL_NAME, length = 512)
-  private URL thumbnailUrl;
-
-  @Column(name = DBConstant.ASSET_COLUMN_WEBPUBLICURL_NAME, length = 512)
-  private URL webPublicUrl;
-
-  @Column(name = DBConstant.ASSET_COLUMN_ACCESSKEY_NAME)
-  private String accessKey;
-
-  @Column(name = DBConstant.ASSET_COLUMN_THUMBNAILACCESSKEY_NAME)
-  private String thumbnailAccessKey;
-
-  @Column(name = DBConstant.ASSET_COLUMN_WEBPUBLICACCESSKEY_NAME)
-  private String webpublicAccessKey;
-
-  @Column(name = DBConstant.ASSET_COLUMN_URI_NAME, length = 512)
-  private URI uri;
-
   @ManyToOne
   @OnDelete(action = OnDeleteAction.SET_NULL)
   @JoinColumn(name = "folder_id")
   private AssetFolder folder;
-
-  @Column(name = DBConstant.ASSET_COLUMN_ISSENSITIVE_NAME, nullable = false)
-  private Boolean isSensitive = false;
-
   @Column(name = DBConstant.ASSET_COLUMN_ISLINK_NAME, nullable = false)
   private Boolean isLink = false;
-
-  @Column(name = DBConstant.ASSET_COLUMN_BLURHASH_NAME)
-  private String blurhash;
-
-  @Column(name = DBConstant.ASSET_COLUMN_WEBPUBLICTYPE_NAME)
-  private String webPublicType;
-
-  @Column(name = DBConstant.ASSET_COLUMN_REQUESTIP_NAME)
-  private String requestIp;
-
-  @ElementCollection
-  @CollectionTable(name = "asset_assetProperty", joinColumns = @JoinColumn(name = "owner_id"))
-  private List<AssetProperty> assetProperties = new ArrayList<>();
-
+  @Column(name = DBConstant.ASSET_COLUMN_ISSENSITIVE_NAME, nullable = false)
+  private Boolean isSensitive = false;
+  @Column(name = DBConstant.ASSET_COLUMN_MD5_NAME, nullable = false)
+  private String md5;
+  @Column(name = DBConstant.ASSET_COLUMN_NAME_NAME, nullable = false)
+  private String name;
+  @ManyToOne
+  @OnDelete(action = OnDeleteAction.SET_NULL)
+  @JoinColumn(name = "owner_id")
+  private User owner;
   @ElementCollection
   @CollectionTable(name = "asset_requestHeaders", joinColumns = @JoinColumn(name = "owner_id"))
   private List<RequestHeader> requestHeaders = new ArrayList<>();
+  @Column(name = DBConstant.ASSET_COLUMN_REQUESTIP_NAME)
+  private String requestIp;
+  @Column(name = DBConstant.ASSET_COLUMN_SIZE_NAME, nullable = false)
+  private Integer size;
+  @Column(name = DBConstant.ASSET_COLUMN_STOREDINTERNAL_NAME, nullable = false)
+  private Boolean storedInternal = false;
+  @Column(name = DBConstant.ASSET_COLUMN_THUMBNAILACCESSKEY_NAME)
+  private String thumbnailAccessKey;
+  @Column(name = DBConstant.ASSET_COLUMN_THUMBNAILURL_NAME, length = 512)
+  private URL thumbnailUrl;
+  @Column(name = DBConstant.ASSET_COLUMN_TYPE_NAME, nullable = false)
+  private String type;
+  @Column(name = DBConstant.ASSET_COLUMN_URI_NAME, length = 512)
+  private URI uri;
+  @Column(name = DBConstant.ASSET_COLUMN_URL_NAME, nullable = false, length = 512)
+  private URL url;
+  @Column(name = DBConstant.ASSET_COLUMN_WEBPUBLICTYPE_NAME)
+  private String webPublicType;
+  @Column(name = DBConstant.ASSET_COLUMN_WEBPUBLICURL_NAME, length = 512)
+  private URL webPublicUrl;
+  @Column(name = DBConstant.ASSET_COLUMN_WEBPUBLICACCESSKEY_NAME)
+  private String webpublicAccessKey;
 
   // TODO: Maybe porn maybe sensitive?
 

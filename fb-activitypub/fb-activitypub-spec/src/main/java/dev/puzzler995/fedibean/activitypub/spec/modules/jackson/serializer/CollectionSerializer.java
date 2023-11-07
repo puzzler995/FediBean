@@ -13,9 +13,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.jackson.JsonComponent;
 
-@JsonComponent
+//@JsonComponent
 public class CollectionSerializer extends JsonSerializer<Collection> {
 
   @Override
@@ -27,6 +26,13 @@ public class CollectionSerializer extends JsonSerializer<Collection> {
       //      gen.writeStartObject();
       Method[] methods = value.getClass().getMethods();
       Boolean notEmpty = Boolean.FALSE;
+      List<String> types = value.getType();
+      Boolean isOrdered = Boolean.FALSE;
+      if (types != null) {
+        if (types.contains("OrderedCollection") || types.contains("OrderedCollectionPage")) {
+          isOrdered = Boolean.TRUE;
+        }
+      }
       for (Method method : methods) {
         if (!StringUtils.equalsIgnoreCase(method.getName(), "getClass")
             && method.getName().startsWith("get")) {
@@ -38,9 +44,7 @@ public class CollectionSerializer extends JsonSerializer<Collection> {
           } catch (Exception e) {
             result = null;
           }
-          if (!StringUtils.equalsIgnoreCase(key, "Items")
-              || value.getType().contains("OrderedCollection")
-              || value.getType().contains("OrderedCollectionPage")) {
+          if (!StringUtils.equalsIgnoreCase(key, "Items") || isOrdered) {
             String finalKey = key;
             String[] newKey = {key};
             SPECIAL_METHOD_SUFFIXES.entrySet().stream()

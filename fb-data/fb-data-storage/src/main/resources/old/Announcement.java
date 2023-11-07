@@ -21,23 +21,18 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Table(name = "announcement")
 public class Announcement extends DBEntity implements Serializable {
   private static final long serialVersionUID = 8364253152110458587L;
-
-  @Lob
-  @Column(name = "text", nullable = false)
-  private String text;
-
-  @Lob
-  @Column(name = "title", nullable = false)
-  private String title;
-
-  @LastModifiedDate
-  @Column(name = "updated_at")
-  private ZonedDateTime updatedAt;
-
-  @Column(name = "show_popup", nullable = false)
-  private Boolean showPopup = false;
-
   @ManyToOne
   @JoinColumn(name = "attachment_id")
   private Asset attachment;
+  @Column(name = "show_popup", nullable = false)
+  private Boolean showPopup = false;
+  @Lob
+  @Column(name = "text", nullable = false)
+  private String text;
+  @Lob
+  @Column(name = "title", nullable = false)
+  private String title;
+  @LastModifiedDate
+  @Column(name = "updated_at")
+  private ZonedDateTime updatedAt;
 }

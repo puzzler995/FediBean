@@ -34,25 +34,19 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.NOTEEDIT_TABLE_NAME)
 public class NoteEdit implements Serializable {
   private static final long serialVersionUID = -809105644444501507L;
-
+  @Column(name = ExampleConstants.NOTEEDIT_COLUMN_CW_NAME, length = 512)
+  private String cw;
+  @Column(name = ExampleConstants.NOTEEDIT_COLUMN_FILEIDS_NAME, nullable = false)
+  private List<String> fileIds;
   @Id
   @Column(name = ExampleConstants.NOTEEDIT_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"noteId\"", nullable = false)
   private Note note;
-
   @Column(name = ExampleConstants.NOTEEDIT_COLUMN_TEXT_NAME, length = Integer.MAX_VALUE)
   private String text;
-
-  @Column(name = ExampleConstants.NOTEEDIT_COLUMN_CW_NAME, length = 512)
-  private String cw;
-
-  @Column(name = ExampleConstants.NOTEEDIT_COLUMN_FILEIDS_NAME, nullable = false)
-  private List<String> fileIds;
-
   @Column(name = ExampleConstants.NOTEEDIT_COLUMN_UPDATEDAT_NAME, nullable = false)
   private OffsetDateTime updatedAt;
 }

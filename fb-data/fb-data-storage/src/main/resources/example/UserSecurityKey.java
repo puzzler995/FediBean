@@ -39,21 +39,17 @@ public class UserSecurityKey implements Serializable {
       nullable = false,
       length = Integer.MAX_VALUE)
   private String id;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"", nullable = false)
-  private User user;
-
+  @Column(name = ExampleConstants.USERSECURITYKEY_COLUMN_LASTUSED_NAME, nullable = false)
+  private OffsetDateTime lastUsed;
+  @Column(name = ExampleConstants.USERSECURITYKEY_COLUMN_NAME_NAME, nullable = false, length = 30)
+  private String name;
   @Column(
       name = ExampleConstants.USERSECURITYKEY_COLUMN_PUBLICKEY_NAME,
       nullable = false,
       length = Integer.MAX_VALUE)
   private String publicKey;
-
-  @Column(name = ExampleConstants.USERSECURITYKEY_COLUMN_LASTUSED_NAME, nullable = false)
-  private OffsetDateTime lastUsed;
-
-  @Column(name = ExampleConstants.USERSECURITYKEY_COLUMN_NAME_NAME, nullable = false, length = 30)
-  private String name;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 }

@@ -36,61 +36,46 @@ import org.hibernate.type.SqlTypes;
 @Table(name = ExampleConstants.ANTENNA_TABLE_NAME)
 public class Antenna implements Serializable {
   private static final long serialVersionUID = 3085393926227766350L;
-
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_CASESENSITIVE_NAME, nullable = false)
+  private Boolean caseSensitive = false;
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_EXCLUDEKEYWORDS_NAME, nullable = false)
+  @JdbcTypeCode(SqlTypes.JSON)
+  private Map<String, Object> excludeKeywords;
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_EXPRESSION_NAME, length = 2048)
+  private String expression;
   @Id
   @Column(name = ExampleConstants.ANTENNA_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_INSTANCES_NAME, nullable = false)
+  @JdbcTypeCode(SqlTypes.JSON)
+  private Map<String, Object> instances;
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_KEYWORDS_NAME, nullable = false)
+  @JdbcTypeCode(SqlTypes.JSON)
+  private Map<String, Object> keywords;
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_NAME_NAME, nullable = false, length = 128)
+  private String name;
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_NOTIFY_NAME, nullable = false)
+  private Boolean notify = false;
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)
   private User user;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_NAME_NAME, nullable = false, length = 128)
-  private String name;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userListId\"")
-  private UserList userList;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_KEYWORDS_NAME, nullable = false)
-  @JdbcTypeCode(SqlTypes.JSON)
-  private Map<String, Object> keywords;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_WITHFILE_NAME, nullable = false)
-  private Boolean withFile = false;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_EXPRESSION_NAME, length = 2048)
-  private String expression;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_NOTIFY_NAME, nullable = false)
-  private Boolean notify = false;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_CASESENSITIVE_NAME, nullable = false)
-  private Boolean caseSensitive = false;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_WITHREPLIES_NAME, nullable = false)
-  private Boolean withReplies = false;
-
   @ManyToOne(fetch = FetchType.LAZY)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userGroupJoiningId\"")
   private UserGroupJoining userGroupJoining;
-
+  @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userListId\"")
+  private UserList userList;
   @Column(name = ExampleConstants.ANTENNA_COLUMN_USERS_NAME, nullable = false)
   private List<String> users;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_EXCLUDEKEYWORDS_NAME, nullable = false)
-  @JdbcTypeCode(SqlTypes.JSON)
-  private Map<String, Object> excludeKeywords;
-
-  @Column(name = ExampleConstants.ANTENNA_COLUMN_INSTANCES_NAME, nullable = false)
-  @JdbcTypeCode(SqlTypes.JSON)
-  private Map<String, Object> instances;
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_WITHFILE_NAME, nullable = false)
+  private Boolean withFile = false;
+  @Column(name = ExampleConstants.ANTENNA_COLUMN_WITHREPLIES_NAME, nullable = false)
+  private Boolean withReplies = false;
 
   /*
       TODO [JPA Buddy] create field to map the 'src' column

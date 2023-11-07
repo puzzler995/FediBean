@@ -27,32 +27,23 @@ import lombok.Setter;
 @Table(name = ExampleConstants.AD_TABLE_NAME)
 public class Ad implements Serializable {
   private static final long serialVersionUID = -2627502054170805704L;
-
+  @Column(name = ExampleConstants.AD_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Column(name = ExampleConstants.AD_COLUMN_EXPIRESAT_NAME, nullable = false)
+  private OffsetDateTime expiresAt;
   @Id
   @Column(name = ExampleConstants.AD_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.AD_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
-  @Column(name = ExampleConstants.AD_COLUMN_EXPIRESAT_NAME, nullable = false)
-  private OffsetDateTime expiresAt;
-
-  @Column(name = ExampleConstants.AD_COLUMN_PLACE_NAME, nullable = false, length = 32)
-  private String place;
-
-  @Column(name = ExampleConstants.AD_COLUMN_PRIORITY_NAME, nullable = false, length = 32)
-  private String priority;
-
-  @Column(name = ExampleConstants.AD_COLUMN_URL_NAME, nullable = false, length = 1024)
-  private String url;
-
   @Column(name = ExampleConstants.AD_COLUMN_IMAGEURL_NAME, nullable = false, length = 1024)
   private String imageUrl;
-
   @Column(name = ExampleConstants.AD_COLUMN_MEMO_NAME, nullable = false, length = 8192)
   private String memo;
-
+  @Column(name = ExampleConstants.AD_COLUMN_PLACE_NAME, nullable = false, length = 32)
+  private String place;
+  @Column(name = ExampleConstants.AD_COLUMN_PRIORITY_NAME, nullable = false, length = 32)
+  private String priority;
   @Column(name = ExampleConstants.AD_COLUMN_RATIO_NAME, nullable = false)
   private Integer ratio;
+  @Column(name = ExampleConstants.AD_COLUMN_URL_NAME, nullable = false, length = 1024)
+  private String url;
 }

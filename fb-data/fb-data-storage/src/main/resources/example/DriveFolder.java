@@ -32,24 +32,19 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.DRIVEFOLDER_TABLE_NAME)
 public class DriveFolder implements Serializable {
   private static final long serialVersionUID = -8489239608712401539L;
-
+  @Column(name = ExampleConstants.DRIVEFOLDER_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.DRIVEFOLDER_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.DRIVEFOLDER_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
   @Column(name = ExampleConstants.DRIVEFOLDER_COLUMN_NAME_NAME, nullable = false, length = 128)
   private String name;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"")
-  private User user;
-
   @ManyToOne(fetch = FetchType.LAZY)
   @OnDelete(action = OnDeleteAction.SET_NULL)
   @JoinColumn(name = "\"parentId\"")
   private DriveFolder parent;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"")
+  private User user;
 }

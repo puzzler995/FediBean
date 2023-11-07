@@ -28,8 +28,17 @@ import org.apache.http.entity.ContentType;
 @JsonInclude(Include.NON_EMPTY)
 @JsonSerialize(using = LinkSerializer.class)
 public class Link extends Resolvable {
+  private Integer height;
   @Nonnull private CompactedIri href;
-
+  private Locale hreflang;
+  private ContentType mediaType;
+  private String name;
+  private ContentMap nameMap;
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> preview = new ArrayList<>();
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<String> rel;
+  private String summary;
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<String> type =
       new ArrayList<>() {
@@ -37,20 +46,7 @@ public class Link extends Resolvable {
           add("Link");
         }
       };
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<String> rel;
-
-  private ContentType mediaType;
-  private String name;
-  private ContentMap nameMap;
-  private Locale hreflang;
-  private Integer height;
   private Integer width;
-  private String summary;
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> preview = new ArrayList<>();
 
   public Link(@JsonProperty("href") String href) {
     this.href = new CompactedIri(href);

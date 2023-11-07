@@ -21,15 +21,12 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = DBConstant.ASSETFOLDER_TABLE_NAME)
 public class AssetFolder extends DBItem {
   private static final long serialVersionUID = 7109080277225968210L;
-
-  @Column(name = DBConstant.ASSETFOLDER_COLUMN_NAME_NAME, nullable = false)
-  private String name;
-
   @ManyToOne
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "creator_id")
   private User creator;
-
+  @Column(name = DBConstant.ASSETFOLDER_COLUMN_NAME_NAME, nullable = false)
+  private String name;
   @ManyToOne
   @OnDelete(action = OnDeleteAction.SET_NULL)
   @JoinColumn(name = "parent_id")

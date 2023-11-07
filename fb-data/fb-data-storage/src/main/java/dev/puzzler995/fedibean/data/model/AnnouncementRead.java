@@ -20,14 +20,12 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = DBConstant.ANNOUNCEMENTREAD_TABLE_NAME)
 public class AnnouncementRead extends DBItem {
   private static final long serialVersionUID = -3367503786821476579L;
-
-  @ManyToOne(optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "user_id", nullable = false)
-  private User user;
-
   @ManyToOne(optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "announcement_id", nullable = false)
   private Announcement announcement;
+  @ManyToOne(optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 }

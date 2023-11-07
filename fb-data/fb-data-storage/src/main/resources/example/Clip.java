@@ -32,25 +32,19 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.CLIP_TABLE_NAME)
 public class Clip implements Serializable {
   private static final long serialVersionUID = -45775752364336484L;
-
+  @Column(name = ExampleConstants.CLIP_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Column(name = ExampleConstants.CLIP_COLUMN_DESCRIPTION_NAME, length = 2048)
+  private String description;
   @Id
   @Column(name = ExampleConstants.CLIP_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.CLIP_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
+  @Column(name = ExampleConstants.CLIP_COLUMN_ISPUBLIC_NAME, nullable = false)
+  private Boolean isPublic = false;
+  @Column(name = ExampleConstants.CLIP_COLUMN_NAME_NAME, nullable = false, length = 128)
+  private String name;
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)
   private User user;
-
-  @Column(name = ExampleConstants.CLIP_COLUMN_NAME_NAME, nullable = false, length = 128)
-  private String name;
-
-  @Column(name = ExampleConstants.CLIP_COLUMN_ISPUBLIC_NAME, nullable = false)
-  private Boolean isPublic = false;
-
-  @Column(name = ExampleConstants.CLIP_COLUMN_DESCRIPTION_NAME, length = 2048)
-  private String description;
 }

@@ -33,24 +33,19 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.AUTHSESSION_TABLE_NAME)
 public class AuthSession implements Serializable {
   private static final long serialVersionUID = 238024059390099741L;
-
-  @Id
-  @Column(name = ExampleConstants.AUTHSESSION_COLUMN_ID_NAME, nullable = false, length = 32)
-  private String id;
-
-  @Column(name = ExampleConstants.AUTHSESSION_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
-  @Column(name = ExampleConstants.AUTHSESSION_COLUMN_TOKEN_NAME, nullable = false, length = 128)
-  private String token;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"")
-  private User user;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"appId\"", nullable = false)
   private App app;
+  @Column(name = ExampleConstants.AUTHSESSION_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Id
+  @Column(name = ExampleConstants.AUTHSESSION_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
+  @Column(name = ExampleConstants.AUTHSESSION_COLUMN_TOKEN_NAME, nullable = false, length = 128)
+  private String token;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"")
+  private User user;
 }

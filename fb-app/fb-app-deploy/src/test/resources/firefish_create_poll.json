@@ -1,0 +1,82 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1",
+    {
+      "manuallyApprovesFollowers": "as:manuallyApprovesFollowers",
+      "movedToUri": "as:movedTo",
+      "sensitive": "as:sensitive",
+      "Hashtag": "as:Hashtag",
+      "quoteUri": "fedibird:quoteUri",
+      "quoteUrl": "as:quoteUrl",
+      "toot": "http://joinmastodon.org/ns#",
+      "Emoji": "toot:Emoji",
+      "featured": "toot:featured",
+      "discoverable": "toot:discoverable",
+      "schema": "http://schema.org#",
+      "PropertyValue": "schema:PropertyValue",
+      "value": "schema:value",
+      "misskey": "https://misskey-hub.net/ns#",
+      "_misskey_content": "misskey:_misskey_content",
+      "_misskey_quote": "misskey:_misskey_quote",
+      "_misskey_reaction": "misskey:_misskey_reaction",
+      "_misskey_votes": "misskey:_misskey_votes",
+      "_misskey_talk": "misskey:_misskey_talk",
+      "isCat": "misskey:isCat",
+      "fedibird": "https://misskey-hub.net/ns#",
+      "vcard": "http://www.w3.org/2006/vcard/ns#"
+    }
+  ],
+  "id": "https://fedi.codepenguin.io/notes/9lopdeivahygytrc/activity",
+  "actor": "https://fedi.codepenguin.io/users/9hi4zm9isrdqgcnx",
+  "type": "Create",
+  "published": "2023-11-05T07:15:09.895Z",
+  "object": {
+    "id": "https://fedi.codepenguin.io/notes/9lopdeivahygytrc",
+    "type": "Question",
+    "attributedTo": "https://fedi.codepenguin.io/users/9hi4zm9isrdqgcnx",
+    "summary": null,
+    "content": "<p><span>Test poll pls ignore</span></p>",
+    "_misskey_content": "Test poll pls ignore",
+    "source": {
+      "content": "Test poll pls ignore",
+      "mediaType": "text/x.misskeymarkdown"
+    },
+    "published": "2023-11-05T07:15:09.895Z",
+    "to": [
+      "https://www.w3.org/ns/activitystreams#Public"
+    ],
+    "cc": [
+      "https://fedi.codepenguin.io/users/9hi4zm9isrdqgcnx/followers"
+    ],
+    "inReplyTo": null,
+    "attachment": [],
+    "sensitive": false,
+    "tag": [],
+    "endTime": "2023-11-05T07:16:49.895Z",
+    "oneOf": [
+      {
+        "type": "Note",
+        "name": "No",
+        "replies": {
+          "type": "Collection",
+          "totalItems": 0
+        }
+      },
+      {
+        "type": "Note",
+        "name": "I'm gonna answer anyway",
+        "replies": {
+          "type": "Collection",
+          "totalItems": 0
+        }
+      }
+    ]
+  },
+  "to": [
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "cc": [
+    "https://fedi.codepenguin.io/users/9hi4zm9isrdqgcnx/followers"
+  ]
+}

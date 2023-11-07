@@ -27,6 +27,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 class DeserializationTests {
   @Autowired private APMapper mapper;
 
+  private static Stream<Integer> fileNumbersProvider() {
+    return IntStream.range(0, 159).boxed();
+  }
+
+  private static String readResource(String name) throws IOException {
+    ClassLoader classLoader = DeserializationTests.class.getClassLoader();
+    InputStream inputStream = classLoader.getResourceAsStream(name);
+    String jsonContent = "";
+    if (inputStream != null) {
+      try {
+        jsonContent = IOUtils.toString(inputStream);
+      } finally {
+        inputStream.close();
+      }
+    }
+    return jsonContent;
+  }
+
   private static Stream<Arguments> realWorldActivities() {
     return Stream.of(
         Arguments.of("akkoma_boost_note.json", "Announce"),
@@ -54,22 +72,28 @@ class DeserializationTests {
         Arguments.of("mastodon_update_note.json", "Update"));
   }
 
-  private static String readResource(String name) throws IOException {
-    ClassLoader classLoader = DeserializationTests.class.getClassLoader();
-    InputStream inputStream = classLoader.getResourceAsStream(name);
-    String jsonContent = "";
-    if (inputStream != null) {
-      try {
-        jsonContent = IOUtils.toString(inputStream);
-      } finally {
-        inputStream.close();
-      }
-    }
-    return jsonContent;
+  @ParameterizedTest
+  @MethodSource("fileNumbersProvider")
+  void activityStreamDeserializationTest(int fileNumber) throws IOException {
+    String json = readResource("ASExamples/example_" + fileNumber + ".json");
+    Resolvable actual = mapper.deserialize(json);
+    assertNotNull(actual);
   }
 
-  private static Stream<Integer> fileNumbersProvider() {
-    return IntStream.range(0, 159).boxed();
+  @Test
+  void canReadMediaType() {
+    var json =
+        """
+{
+  "type": "Image",
+  "mediaType": "image/jpeg",
+  "url": "https://cdn.mastodon.example/test_actor/accounts/avatars/109/497/783/827/254/564/original/b0adb5063df194a6.jpg"
+}
+  """;
+    Resolvable resolvable = mapper.deserialize(json);
+    assertTrue(resolvable instanceof APObject);
+    APObject actual = (APObject) resolvable;
+    assertNotNull(actual);
   }
 
   @ParameterizedTest
@@ -78,23 +102,6 @@ class DeserializationTests {
     String json = readResource(activity);
     Resolvable actual = mapper.deserialize(json);
     assertEquals(expected, actual.getType().get(0));
-  }
-
-  @Test
-  void canReadRealWorldNote() throws IOException {
-    String json = readResource("mastodon_create_note.json");
-    Resolvable actualRes = mapper.deserialize(json);
-    assertTrue(actualRes instanceof Activity);
-    Activity actual = (Activity) actualRes;
-    if (actual.getObject() != null && !actual.getObject().isEmpty()) {
-      APObject note = (APObject) actual.getObject().get(0);
-      assertEquals("<p>Creating Test Data!!! :)</p>", note.getContent());
-      assertTrue(note.getContentMap().getLanguages().contains("en"));
-      assertEquals("<p>Creating Test Data!!! :)</p>", note.getContentMap().get("en"));
-      assertEquals("Creating Test Data!!! :)", note.getSource().getContent());
-    } else {
-      fail("Not a note");
-    }
   }
 
   @Test
@@ -117,26 +124,19 @@ class DeserializationTests {
   }
 
   @Test
-  void canReadMediaType() {
-    var json =
-        """
-{
-  "type": "Image",
-  "mediaType": "image/jpeg",
-  "url": "https://cdn.mastodon.example/test_actor/accounts/avatars/109/497/783/827/254/564/original/b0adb5063df194a6.jpg"
-}
-  """;
-    Resolvable resolvable = mapper.deserialize(json);
-    assertTrue(resolvable instanceof APObject);
-    APObject actual = (APObject) resolvable;
-    assertNotNull(actual);
-  }
-
-  @ParameterizedTest
-  @MethodSource("fileNumbersProvider")
-  void activityStreamDeserializationTest(int fileNumber) throws IOException {
-    String json = readResource("ASExamples/example_" + fileNumber + ".json");
-    Resolvable actual = mapper.deserialize(json);
-    assertNotNull(actual);
+  void canReadRealWorldNote() throws IOException {
+    String json = readResource("mastodon_create_note.json");
+    Resolvable actualRes = mapper.deserialize(json);
+    assertTrue(actualRes instanceof Activity);
+    Activity actual = (Activity) actualRes;
+    if (actual.getObject() != null && !actual.getObject().isEmpty()) {
+      APObject note = (APObject) actual.getObject().get(0);
+      assertEquals("<p>Creating Test Data!!! :)</p>", note.getContent());
+      assertTrue(note.getContentMap().getLanguages().contains("en"));
+      assertEquals("<p>Creating Test Data!!! :)</p>", note.getContentMap().get("en"));
+      assertEquals("Creating Test Data!!! :)", note.getSource().getContent());
+    } else {
+      fail("Not a note");
+    }
   }
 }

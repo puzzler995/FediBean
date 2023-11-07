@@ -27,17 +27,13 @@ import lombok.Setter;
 @Table(name = ExampleConstants.USERIP_TABLE_NAME)
 public class UserIp implements Serializable {
   private static final long serialVersionUID = -595308023753718512L;
-
+  @Column(name = ExampleConstants.USERIP_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.USERIP_COLUMN_ID_NAME, nullable = false)
   private Integer id;
-
-  @Column(name = ExampleConstants.USERIP_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
-  @Column(name = ExampleConstants.USERIP_COLUMN_USERID_NAME, nullable = false, length = 32)
-  private String userId;
-
   @Column(name = ExampleConstants.USERIP_COLUMN_IP_NAME, nullable = false, length = 128)
   private String ip;
+  @Column(name = ExampleConstants.USERIP_COLUMN_USERID_NAME, nullable = false, length = 32)
+  private String userId;
 }

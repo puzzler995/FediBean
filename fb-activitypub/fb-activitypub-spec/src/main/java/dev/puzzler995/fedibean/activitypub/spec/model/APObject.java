@@ -30,111 +30,119 @@ import org.apache.http.entity.ContentType;
 @JsonIgnoreProperties(value = {"atomUri", "conversation", "inReplyToAtomUri"})
 public class APObject extends Resolvable {
 
-  private CompactedIri id;
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> attachment = new ArrayList<>();
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> attributedTo = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#actor")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> actor = new ArrayList<>(); // akkoma
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#attachment")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> attachment = new ArrayList<>();
+@JsonProperty("https://www.w3.org/ns/activitystreams#attributedTo")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> attributedTo = new ArrayList<>();
+  @JsonProperty("https://www.w3.org/ns/activitystreams#audience")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> audience = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#bcc")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> bcc = new ArrayList<>();
+  @JsonProperty("https://www.w3.org/ns/activitystreams#bto")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> bto = new ArrayList<>();
+  @JsonProperty("https://www.w3.org/ns/activitystreams#cc")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> cc = new ArrayList<>();
+  @JsonProperty("https://www.w3.org/ns/activitystreams#content")
   private String content;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#contentMap")
   private ContentMap contentMap;
-  private APObject source;
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#context")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> context = new ArrayList<>();
-
-  private String name;
-  private ContentMap nameMap;
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#deleted")
+  @JsonDeserialize(using = OffsetDateTimeDeserializer.class)
+  private OffsetDateTime deleted;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#duration")
+  private Duration duration;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#endTime")
   @JsonDeserialize(using = OffsetDateTimeDeserializer.class)
   private OffsetDateTime endTime;
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#formerType")
+  private String formerType;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#generator")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> generator = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#height")
+  private Integer height;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#icon")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> icon = new ArrayList<>();
 
+  //private CompactedIri id;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#image")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> image = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#inReplyTo")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> inReplyTo = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#location")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> location = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#mediaType")
+  private ContentType mediaType;
+  @JsonProperty("https://misskey-hub.net/ns#_misskey_content")
+  private String misskeyContent;
+  @JsonProperty("https://misskey-hub.net/ns#_misskey_quote")
+  private CompactedIri misskeyQuote;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#name")
+  private String name;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#nameMap")
+  private ContentMap nameMap;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#preview")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> preview = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#published")
   @JsonDeserialize(using = OffsetDateTimeDeserializer.class)
   private OffsetDateTime published;
-
+  @JsonProperty("https://misskey-hub.net/ns#quoteUri")
+  private CompactedIri quoteUri;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#replies")
   private Collection replies;
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#sensitive")
+  private Boolean sensitive;
+  @JsonProperty("_:signature")
+  private LdSignature signature;
+@JsonProperty("https://www.w3.org/ns/activitystreams#source")
+  private APObject source;
   @JsonDeserialize(using = OffsetDateTimeDeserializer.class)
+  @JsonProperty("https://www.w3.org/ns/activitystreams#startTime")
   private OffsetDateTime startTime;
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#summary")
   private String summary;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#summaryMap")
   private ContentMap summaryMap;
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#tag")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> tag = new ArrayList<>();
-
-  @JsonDeserialize(using = OffsetDateTimeDeserializer.class)
-  private OffsetDateTime updated;
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> url = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#target")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> to = new ArrayList<>();
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> bto = new ArrayList<>();
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> cc = new ArrayList<>();
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> bcc = new ArrayList<>();
-
-  private ContentType mediaType;
-  private Duration duration;
-  private String formerType;
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#updated")
   @JsonDeserialize(using = OffsetDateTimeDeserializer.class)
-  private OffsetDateTime deleted;
-
-  private Integer width;
-  private Integer height;
-
-  private Boolean sensitive;
-  private LdSignature signature;
+  private OffsetDateTime updated;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#url")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> url = new ArrayList<>();
+  @JsonProperty("http://schema.org#value")
   private String value;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#width")
+  private Integer width;
 
-  @JsonProperty("_misskey_content")
-  private String misskeyContent;
-
-  @JsonProperty("_misskey_quote")
-  private CompactedIri misskeyQuote;
-
-  private CompactedIri quoteUri;
-
-  @JsonGetter("mediaType")
+  @JsonGetter("https://www.w3.org/ns/activitystreams#mediaType")
   public String getMediaType() {
     return Objects.nonNull(mediaType) ? mediaType.getMimeType() : null;
   }
 
-  @JsonSetter("mediaType")
+  @JsonSetter("https://www.w3.org/ns/activitystreams#mediaType")
   public APObject setMediaType(String mediaType) {
     this.mediaType = ContentType.parse(mediaType);
     return this;

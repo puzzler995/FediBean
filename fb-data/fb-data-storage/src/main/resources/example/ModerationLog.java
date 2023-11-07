@@ -35,23 +35,18 @@ import org.hibernate.type.SqlTypes;
 @Table(name = ExampleConstants.MODERATIONLOG_TABLE_NAME)
 public class ModerationLog implements Serializable {
   private static final long serialVersionUID = -6344176837987049139L;
-
+  @Column(name = ExampleConstants.MODERATIONLOG_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.MODERATIONLOG_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.MODERATIONLOG_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
+  @Column(name = ExampleConstants.MODERATIONLOG_COLUMN_INFO_NAME, nullable = false)
+  @JdbcTypeCode(SqlTypes.JSON)
+  private Map<String, Object> info;
+  @Column(name = ExampleConstants.MODERATIONLOG_COLUMN_TYPE_NAME, nullable = false, length = 128)
+  private String type;
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)
   private User user;
-
-  @Column(name = ExampleConstants.MODERATIONLOG_COLUMN_TYPE_NAME, nullable = false, length = 128)
-  private String type;
-
-  @Column(name = ExampleConstants.MODERATIONLOG_COLUMN_INFO_NAME, nullable = false)
-  @JdbcTypeCode(SqlTypes.JSON)
-  private Map<String, Object> info;
 }

@@ -26,26 +26,19 @@ import lombok.Setter;
 @Table(name = ExampleConstants.CHARTDAYNETWORK_TABLE_NAME)
 public class ChartDayNetwork implements Serializable {
   private static final long serialVersionUID = -1967410515352235004L;
-
+  @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_DATE_NAME, nullable = false)
+  private Integer date;
   @Id
   @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_ID_NAME, nullable = false)
   private Integer id;
-
-  @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_DATE_NAME, nullable = false)
-  private Integer date;
-
-  @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_INCOMINGREQUESTS_NAME, nullable = false)
-  private Integer incomingrequests;
-
-  @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_OUTGOINGREQUESTS_NAME, nullable = false)
-  private Integer outgoingrequests;
-
-  @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_TOTALTIME_NAME, nullable = false)
-  private Integer totaltime;
-
   @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_INCOMINGBYTES_NAME, nullable = false)
   private Integer incomingbytes;
-
+  @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_INCOMINGREQUESTS_NAME, nullable = false)
+  private Integer incomingrequests;
   @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_OUTGOINGBYTES_NAME, nullable = false)
   private Integer outgoingbytes;
+  @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_OUTGOINGREQUESTS_NAME, nullable = false)
+  private Integer outgoingrequests;
+  @Column(name = ExampleConstants.CHARTDAYNETWORK_COLUMN_TOTALTIME_NAME, nullable = false)
+  private Integer totaltime;
 }

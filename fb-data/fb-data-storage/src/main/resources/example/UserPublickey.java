@@ -32,20 +32,16 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.USERPUBLICKEY_TABLE_NAME)
 public class UserPublickey implements Serializable {
   private static final long serialVersionUID = -1154700705043029020L;
-
-  @Id
-  @Column(name = ExampleConstants.USERPUBLICKEY_COLUMN_USERID_NAME, nullable = false, length = 32)
-  private String userId;
-
+  @Column(name = ExampleConstants.USERPUBLICKEY_COLUMN_KEYID_NAME, nullable = false, length = 256)
+  private String keyId;
+  @Column(name = ExampleConstants.USERPUBLICKEY_COLUMN_KEYPEM_NAME, nullable = false, length = 4096)
+  private String keyPem;
   @MapsId
   @OneToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)
   private User user;
-
-  @Column(name = ExampleConstants.USERPUBLICKEY_COLUMN_KEYID_NAME, nullable = false, length = 256)
-  private String keyId;
-
-  @Column(name = ExampleConstants.USERPUBLICKEY_COLUMN_KEYPEM_NAME, nullable = false, length = 4096)
-  private String keyPem;
+  @Id
+  @Column(name = ExampleConstants.USERPUBLICKEY_COLUMN_USERID_NAME, nullable = false, length = 32)
+  private String userId;
 }

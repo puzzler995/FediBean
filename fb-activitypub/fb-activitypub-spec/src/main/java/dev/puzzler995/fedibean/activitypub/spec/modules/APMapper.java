@@ -19,11 +19,6 @@ public class APMapper {
 
   @Getter @Autowired private ObjectMapper mapper;
 
-  @PostConstruct
-  private void testi() {
-    System.out.println("Making mapper");
-  }
-
   public Resolvable deserialize(String json) {
     try {
       return mapper.readValue(json, Resolvable.class);
@@ -38,5 +33,10 @@ public class APMapper {
     } catch (Exception e) {
       throw new RuntimeException(e); // TODO: Exception handling
     }
+  }
+
+  @PostConstruct
+  private void testi() {
+    System.out.println("Making mapper");
   }
 }

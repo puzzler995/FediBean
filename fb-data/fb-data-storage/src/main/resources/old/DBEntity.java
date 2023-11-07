@@ -19,13 +19,11 @@ import org.springframework.data.annotation.CreatedDate;
 @MappedSuperclass
 public class DBEntity implements Serializable {
   private static final long serialVersionUID = 1500064012215826736L;
-
+  @CreatedDate
+  @Column(name = "created_at", nullable = false)
+  private ZonedDateTime createdAt;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id", nullable = false)
   private UUID id;
-
-  @CreatedDate
-  @Column(name = "created_at", nullable = false)
-  private ZonedDateTime createdAt;
 }

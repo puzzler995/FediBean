@@ -11,6 +11,16 @@ import org.springframework.web.reactive.function.client.WebClient;
 // @Configuration
 public class DataQueueConfig {
   @Bean
+  public JobProcessor processor() {
+    return new JobProcessor();
+  }
+
+  @Bean
+  public LettuceConnectionFactory redisConnectionFactory() {
+    return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
+  }
+
+  @Bean
   public TaskExecutor taskExecutor() {
     ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
     executor.setCorePoolSize(5);
@@ -23,15 +33,5 @@ public class DataQueueConfig {
   @Bean
   public WebClient webClient() {
     return WebClient.builder().build();
-  }
-
-  @Bean
-  public JobProcessor processor() {
-    return new JobProcessor();
-  }
-
-  @Bean
-  public LettuceConnectionFactory redisConnectionFactory() {
-    return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
   }
 }

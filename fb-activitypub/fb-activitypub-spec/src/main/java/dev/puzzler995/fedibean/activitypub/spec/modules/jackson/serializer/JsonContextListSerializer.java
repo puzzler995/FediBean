@@ -7,10 +7,8 @@ import dev.puzzler995.fedibean.activitypub.spec.model.JsonContext;
 import jakarta.annotation.Nonnull;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import org.springframework.boot.jackson.JsonComponent;
 
-@JsonComponent
+//@JsonComponent
 public class JsonContextListSerializer extends StdSerializer<List<JsonContext>> {
 
   public JsonContextListSerializer() {
@@ -25,33 +23,15 @@ public class JsonContextListSerializer extends StdSerializer<List<JsonContext>> 
   @Override
   public void serialize(List<JsonContext> value, JsonGenerator gen, SerializerProvider serializers)
       throws IOException {
-    List<String> stringValues =
-        value.stream()
-            .filter(jsonContext -> jsonContext.getPrefix() == null)
-            .map(JsonContext::toString)
-            .toList();
-    Map<String, String> mapValues =
-        value.stream()
-            .filter(jsonContext -> jsonContext.getPrefix() != null)
-            .collect(
-                java.util.stream.Collectors.toMap(
-                    JsonContext::getPrefix, JsonContext::getSuffix, (a, b) -> b));
-
-    if (stringValues.size() == 1 && mapValues.isEmpty()) {
-      gen.writeString(stringValues.get(0));
-    } else if (stringValues.isEmpty()) {
-      gen.writeStartObject();
-      for (Map.Entry<String, String> entry : mapValues.entrySet()) {
-        gen.writeStringField(entry.getKey(), entry.getValue());
-      }
-      gen.writeEndObject();
+    if (value == null || value.isEmpty()) {
+      return;
+    }
+    if (value.size() == 1) {
+      gen.writeString(value.get(0).toString());
     } else {
       gen.writeStartArray();
-      for (String stringValue : stringValues) {
-        gen.writeString(stringValue);
-      }
-      if (!mapValues.isEmpty()) {
-        gen.writeObject(mapValues);
+      for (JsonContext context : value) {
+        gen.writeObject(context);
       }
       gen.writeEndArray();
     }

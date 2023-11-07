@@ -27,11 +27,9 @@ import lombok.Setter;
 @Table(name = ExampleConstants.USEDUSERNAME_TABLE_NAME)
 public class UsedUsername implements Serializable {
   private static final long serialVersionUID = -8519558392997914976L;
-
+  @Column(name = ExampleConstants.USEDUSERNAME_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.USEDUSERNAME_COLUMN_USERNAME_NAME, nullable = false, length = 128)
   private String username;
-
-  @Column(name = ExampleConstants.USEDUSERNAME_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
 }

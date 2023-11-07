@@ -33,21 +33,17 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.ANNOUNCEMENTREAD_TABLE_NAME)
 public class AnnouncementRead implements Serializable {
   private static final long serialVersionUID = 8460910377865894660L;
-
-  @Id
-  @Column(name = ExampleConstants.ANNOUNCEMENTREAD_COLUMN_ID_NAME, nullable = false, length = 32)
-  private String id;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"", nullable = false)
-  private User user;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"announcementId\"", nullable = false)
   private Announcement announcement;
-
   @Column(name = ExampleConstants.ANNOUNCEMENTREAD_COLUMN_CREATEDAT_NAME, nullable = false)
   private OffsetDateTime createdAt;
+  @Id
+  @Column(name = ExampleConstants.ANNOUNCEMENTREAD_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 }

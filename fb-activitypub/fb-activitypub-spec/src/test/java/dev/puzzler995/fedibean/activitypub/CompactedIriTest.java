@@ -24,18 +24,6 @@ class CompactedIriTest {
   }
 
   @ParameterizedTest
-  @MethodSource("compactStrings")
-  void parseCompactStrings(String compact, String expected) {
-    TryCreateResults results = CompactedIri.tryCreate(compact);
-    assertTrue(results.getSuccess());
-    try {
-      assertEquals(new URI(expected).toString(), results.getValue().getUri().toString());
-    } catch (URISyntaxException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  @ParameterizedTest
   @ValueSource(
       strings = {
         "https://www.w3.org/ns/activitystreams#activity",
@@ -60,5 +48,17 @@ class CompactedIriTest {
     TryCreateResults results = CompactedIri.tryCreate(compact);
     assertTrue(results.getSuccess());
     assertEquals(compact, results.getValue().toCompact());
+  }
+
+  @ParameterizedTest
+  @MethodSource("compactStrings")
+  void parseCompactStrings(String compact, String expected) {
+    TryCreateResults results = CompactedIri.tryCreate(compact);
+    assertTrue(results.getSuccess());
+    try {
+      assertEquals(new URI(expected).toString(), results.getValue().getUri().toString());
+    } catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

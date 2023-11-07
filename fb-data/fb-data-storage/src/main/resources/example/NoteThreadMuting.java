@@ -32,22 +32,18 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.NOTETHREADMUTING_TABLE_NAME)
 public class NoteThreadMuting implements Serializable {
   private static final long serialVersionUID = 7252683936324460564L;
-
+  @Column(name = ExampleConstants.NOTETHREADMUTING_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.NOTETHREADMUTING_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.NOTETHREADMUTING_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "\"userId\"", nullable = false)
-  private User user;
-
   @Column(
       name = ExampleConstants.NOTETHREADMUTING_COLUMN_THREADID_NAME,
       nullable = false,
       length = 256)
   private String threadId;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "\"userId\"", nullable = false)
+  private User user;
 }

@@ -24,14 +24,14 @@ import lombok.experimental.Accessors;
 @Table(name = "note")
 public class Note extends DBEntity implements Serializable {
   private static final long serialVersionUID = -3705102227463321172L;
-
-  @ManyToOne
-  @JoinColumn(name = "reply_to_id")
-  private Note replyTo;
-
-  @Column(name = "name")
-  private String name;
-
+  @ManyToMany
+  @JoinTable(
+      name = "note_attachments",
+      joinColumns = @JoinColumn(name = "note_id"),
+      inverseJoinColumns = @JoinColumn(name = "attachments_id"))
+  private Set<Asset> attachments = new LinkedHashSet<>();
+  @Column(name = "boost_count", nullable = false)
+  private Integer boostCount;
   @Lob
   @Column(name = "content_warning")
   private String contentWarning;
@@ -42,24 +42,16 @@ public class Note extends DBEntity implements Serializable {
 
   @Column(name = "local_only", nullable = false)
   private Boolean localOnly = false;
-
-  @Column(name = "boost_count", nullable = false)
-  private Integer boostCount;
-
+  @Column(name = "name")
+  private String name;
   @Column(name = "reply_count", nullable = false)
   private Integer replyCount;
-
-  @Column(name = "uri")
-  private URI uri;
-
+  @ManyToOne
+  @JoinColumn(name = "reply_to_id")
+  private Note replyTo;
   @Lob
   @Column(name = "text")
   private String text;
-
-  @ManyToMany
-  @JoinTable(
-      name = "note_attachments",
-      joinColumns = @JoinColumn(name = "note_id"),
-      inverseJoinColumns = @JoinColumn(name = "attachments_id"))
-  private Set<Asset> attachments = new LinkedHashSet<>();
+  @Column(name = "uri")
+  private URI uri;
 }

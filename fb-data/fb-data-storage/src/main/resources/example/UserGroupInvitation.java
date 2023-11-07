@@ -32,14 +32,11 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.USERGROUPINVITATION_TABLE_NAME)
 public class UserGroupInvitation implements Serializable {
   private static final long serialVersionUID = -6326668946975862793L;
-
+  @Column(name = ExampleConstants.USERGROUPINVITATION_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.USERGROUPINVITATION_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.USERGROUPINVITATION_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)

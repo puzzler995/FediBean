@@ -1,17 +1,12 @@
 package dev.puzzler995.fedibean.activitypub.spec.model;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import dev.puzzler995.fedibean.activitypub.spec.modules.jackson.deserializer.JsonContextListDeserializer;
+import de.escalon.hypermedia.hydra.mapping.Vocab;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,37 +15,36 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
+@Vocab("https://www.w3.org/ns/activitystreams#")
 public class Resolvable {
+  @JsonProperty("@id")
   private CompactedIri id;
-
+  //@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  //private List<JsonContext> jsonContext = new ArrayList<>();
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<String> type;
+  //@JsonAnySetter @JsonAnyGetter private Map<String, Object> unknownProperties = new HashMap<>();
 
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<JsonContext> jsonContext = new ArrayList<>();
+  //public void addJsonContext(JsonContext context) {
+  //  jsonContext.add(context);
+  //}
+  //
+  //public void addJsonContext() {
+  //  this.addJsonContext(JsonContext.activityStreams);
+  //}
+  //
+  //@JsonProperty("@context")
+  //public List<JsonContext> getJsonContext() {
+  //  return jsonContext;
+  //}
+  //
+  //@JsonProperty("@context")
+  //@JsonDeserialize(using = JsonContextListDeserializer.class)
+  //public void setJsonContext(List<JsonContext> jsonContext) {
+  //  this.jsonContext = jsonContext;
+  //}
 
-  @JsonAnySetter @JsonAnyGetter private Map<String, Object> unknownProperties = new HashMap<>();
-
-  @JsonProperty("@context")
-  public List<JsonContext> getJsonContext() {
-    return jsonContext;
-  }
-
-  @JsonProperty("@context")
-  @JsonDeserialize(using = JsonContextListDeserializer.class)
-  public void setJsonContext(List<JsonContext> jsonContext) {
-    this.jsonContext = jsonContext;
-  }
-
-  public void addJsonContext(JsonContext context) {
-    jsonContext.add(context);
-  }
-
-  public void addJsonContext() {
-    this.addJsonContext(JsonContext.activityStreams);
-  }
-
-  @JsonProperty("type")
+  @JsonProperty("@type")
   public void setType(List<String> type) {
     this.type = type;
   }

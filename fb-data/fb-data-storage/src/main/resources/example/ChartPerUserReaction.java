@@ -26,20 +26,16 @@ import lombok.Setter;
 @Table(name = ExampleConstants.CHARTPERUSERREACTION_TABLE_NAME)
 public class ChartPerUserReaction implements Serializable {
   private static final long serialVersionUID = -1462321877181055242L;
-
-  @Id
-  @Column(name = ExampleConstants.CHARTPERUSERREACTION_COLUMN_ID_NAME, nullable = false)
-  private Integer id;
-
   @Column(name = ExampleConstants.CHARTPERUSERREACTION_COLUMN_DATE_NAME, nullable = false)
   private Integer date;
-
   @Column(
       name = ExampleConstants.CHARTPERUSERREACTION_COLUMN_GROUP_NAME,
       nullable = false,
       length = 128)
   private String group;
-
+  @Id
+  @Column(name = ExampleConstants.CHARTPERUSERREACTION_COLUMN_ID_NAME, nullable = false)
+  private Integer id;
   @Column(name = ExampleConstants.CHARTPERUSERREACTION_COLUMN_LOCALCOUNT_NAME, nullable = false)
   private Short localCount;
 

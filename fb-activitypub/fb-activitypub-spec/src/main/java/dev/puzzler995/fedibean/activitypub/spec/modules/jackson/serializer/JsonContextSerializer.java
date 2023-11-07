@@ -7,7 +7,7 @@ import dev.puzzler995.fedibean.activitypub.spec.model.JsonContext;
 import java.io.IOException;
 import org.springframework.boot.jackson.JsonComponent;
 
-@JsonComponent
+//@JsonComponent
 public class JsonContextSerializer extends JsonSerializer<JsonContext> {
   @Override
   public void serialize(JsonContext context, JsonGenerator gen, SerializerProvider serializers)

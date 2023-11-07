@@ -22,17 +22,14 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = DBConstant.MUTE_TABLE_NAME)
 public class Mute extends DBItem {
   private static final long serialVersionUID = -7220776285849647754L;
-
-  @ManyToOne(optional = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "target_id", nullable = false)
-  private User target;
-
+  @Column(name = DBConstant.MUTE_COLUMN_EXPIRES_NAME)
+  private OffsetDateTime expires;
   @ManyToOne(optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "muter_id", nullable = false)
   private User muter;
-
-  @Column(name = DBConstant.MUTE_COLUMN_EXPIRES_NAME)
-  private OffsetDateTime expires;
+  @ManyToOne(optional = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "target_id", nullable = false)
+  private User target;
 }

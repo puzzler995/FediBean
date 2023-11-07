@@ -26,22 +26,18 @@ import org.hibernate.annotations.OnDeleteAction;
 @Embeddable
 public class Poll implements Serializable {
   private static final long serialVersionUID = -422480424560574492L;
-
-  @OneToOne(optional = false, orphanRemoval = true)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "note_id", nullable = false)
-  private Note note;
-
+  @Column(name = DBConstant.POLL_COLUMN_CREATED_NAME, nullable = false)
+  private OffsetDateTime created;
   @Column(name = DBConstant.POLL_COLUMN_EXPIRES_NAME)
   private OffsetDateTime expires;
 
   @Column(name = DBConstant.POLL_COLUMN_MULTIPLECHOICE_NAME, nullable = false)
   private Boolean multipleChoice = false;
-
+  @OneToOne(optional = false, orphanRemoval = true)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "note_id", nullable = false)
+  private Note note;
   @ElementCollection
   @CollectionTable(name = "poll_pollChoice", joinColumns = @JoinColumn(name = "owner_id"))
   private List<PollChoice> pollChoice = new ArrayList<>();
-
-  @Column(name = DBConstant.POLL_COLUMN_CREATED_NAME, nullable = false)
-  private OffsetDateTime created;
 }

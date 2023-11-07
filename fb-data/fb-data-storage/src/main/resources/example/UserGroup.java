@@ -32,22 +32,17 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.USERGROUP_TABLE_NAME)
 public class UserGroup implements Serializable {
   private static final long serialVersionUID = -1748884407591712876L;
-
+  @Column(name = ExampleConstants.USERGROUP_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.USERGROUP_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.USERGROUP_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
+  @Column(name = ExampleConstants.USERGROUP_COLUMN_ISPRIVATE_NAME, nullable = false)
+  private Boolean isPrivate = false;
   @Column(name = ExampleConstants.USERGROUP_COLUMN_NAME_NAME, nullable = false, length = 256)
   private String name;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)
   private User user;
-
-  @Column(name = ExampleConstants.USERGROUP_COLUMN_ISPRIVATE_NAME, nullable = false)
-  private Boolean isPrivate = false;
 }

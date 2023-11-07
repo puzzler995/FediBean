@@ -32,19 +32,15 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.USERLIST_TABLE_NAME)
 public class UserList implements Serializable {
   private static final long serialVersionUID = 1220891354440545322L;
-
+  @Column(name = ExampleConstants.USERLIST_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
   @Id
   @Column(name = ExampleConstants.USERLIST_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.USERLIST_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
+  @Column(name = ExampleConstants.USERLIST_COLUMN_NAME_NAME, nullable = false, length = 128)
+  private String name;
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)
   private User user;
-
-  @Column(name = ExampleConstants.USERLIST_COLUMN_NAME_NAME, nullable = false, length = 128)
-  private String name;
 }

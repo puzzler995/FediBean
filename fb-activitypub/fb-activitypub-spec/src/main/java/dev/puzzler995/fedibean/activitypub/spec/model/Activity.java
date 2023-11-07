@@ -19,62 +19,36 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @JsonInclude(Include.NON_EMPTY)
 public class Activity extends APObject {
-  public static final List<String> types =
-      List.of(
-          "Accept",
-          "Add",
-          "Announce",
-          "Arrive",
-          "Block",
-          "Create",
-          "Delete",
-          "Dislike",
-          "Flag",
-          "Follow",
-          "Ignore",
-          "Invite",
-          "Join",
-          "Leave",
-          "Like",
-          "Listen",
-          "Move",
-          "Offer",
-          "Reject",
-          "Read",
-          "Remove",
-          "TentativeReject",
-          "TentativeAccept",
-          "Travel",
-          "Undo",
-          "Update",
-          "View",
-          "EmojiReact");
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#actor")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> actor = new ArrayList<>();
-
+  @JsonProperty("http://litepub.social/ns#directMessage")
+  private Boolean directMessage;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#instrument")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> instrument = new ArrayList<>();
+  @JsonProperty("https://misskey-hub.net/ns#_misskey_reaction")
+  private String misskeyReaction;
+  @JsonProperty("https://www.w3.org/ns/activitystreams#Object")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> object = new ArrayList<>();
-
+  @JsonProperty("https://www.w3.org/ns/activitystreams#origin")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> origin = new ArrayList<>();
+  @JsonProperty("https://www.w3.org/ns/activitystreams#result")
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  private List<Resolvable> result = new ArrayList<>();
+  @JsonProperty("https://www.w3.org/ns/activitystreams#target")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   private List<Resolvable> target = new ArrayList<>();
 
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> result = new ArrayList<>();
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> origin = new ArrayList<>();
-
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-  private List<Resolvable> instrument = new ArrayList<>();
-
-  @JsonProperty("_misskey_reaction")
-  private String misskeyReaction;
-
-  private Boolean directMessage;
-
   public Activity addActor(Resolvable actor) {
     this.actor.add(actor);
+    return this;
+  }
+
+  public Activity addInstrument(Resolvable instrument) {
+    this.instrument.add(instrument);
     return this;
   }
 
@@ -83,8 +57,8 @@ public class Activity extends APObject {
     return this;
   }
 
-  public Activity addTarget(Resolvable target) {
-    this.target.add(target);
+  public Activity addOrigin(Resolvable origin) {
+    this.origin.add(origin);
     return this;
   }
 
@@ -93,13 +67,8 @@ public class Activity extends APObject {
     return this;
   }
 
-  public Activity addOrigin(Resolvable origin) {
-    this.origin.add(origin);
-    return this;
-  }
-
-  public Activity addInstrument(Resolvable instrument) {
-    this.instrument.add(instrument);
+  public Activity addTarget(Resolvable target) {
+    this.target.add(target);
     return this;
   }
 }

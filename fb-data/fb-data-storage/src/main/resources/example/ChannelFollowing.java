@@ -32,21 +32,17 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.CHANNELFOLLOWING_TABLE_NAME)
 public class ChannelFollowing implements Serializable {
   private static final long serialVersionUID = -3186292974494498695L;
-
-  @Id
-  @Column(name = ExampleConstants.CHANNELFOLLOWING_COLUMN_ID_NAME, nullable = false, length = 32)
-  private String id;
-
   @Column(name = ExampleConstants.CHANNELFOLLOWING_COLUMN_CREATEDAT_NAME, nullable = false)
   private OffsetDateTime createdAt;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"followeeId\"", nullable = false)
   private Channel followee;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"followerId\"", nullable = false)
   private User follower;
+  @Id
+  @Column(name = ExampleConstants.CHANNELFOLLOWING_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
 }

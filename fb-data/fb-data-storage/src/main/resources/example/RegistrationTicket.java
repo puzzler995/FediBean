@@ -27,17 +27,14 @@ import lombok.Setter;
 @Table(name = ExampleConstants.REGISTRATIONTICKET_TABLE_NAME)
 public class RegistrationTicket implements Serializable {
   private static final long serialVersionUID = -5781106449176639924L;
-
-  @Id
-  @Column(name = ExampleConstants.REGISTRATIONTICKET_COLUMN_ID_NAME, nullable = false, length = 32)
-  private String id;
-
-  @Column(name = ExampleConstants.REGISTRATIONTICKET_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
   @Column(
       name = ExampleConstants.REGISTRATIONTICKET_COLUMN_CODE_NAME,
       nullable = false,
       length = 64)
   private String code;
+  @Column(name = ExampleConstants.REGISTRATIONTICKET_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Id
+  @Column(name = ExampleConstants.REGISTRATIONTICKET_COLUMN_ID_NAME, nullable = false, length = 32)
+  private String id;
 }

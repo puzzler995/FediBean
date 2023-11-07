@@ -32,24 +32,19 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.MUTING_TABLE_NAME)
 public class Muting implements Serializable {
   private static final long serialVersionUID = -1077327971031217316L;
-
+  @Column(name = ExampleConstants.MUTING_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Column(name = ExampleConstants.MUTING_COLUMN_EXPIRESAT_NAME)
+  private OffsetDateTime expiresAt;
   @Id
   @Column(name = ExampleConstants.MUTING_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.MUTING_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"muteeId\"", nullable = false)
   private User mutee;
-
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"muterId\"", nullable = false)
   private User muter;
-
-  @Column(name = ExampleConstants.MUTING_COLUMN_EXPIRESAT_NAME)
-  private OffsetDateTime expiresAt;
 }

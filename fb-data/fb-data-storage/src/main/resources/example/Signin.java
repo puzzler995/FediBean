@@ -35,26 +35,20 @@ import org.hibernate.type.SqlTypes;
 @Table(name = ExampleConstants.SIGNIN_TABLE_NAME)
 public class Signin implements Serializable {
   private static final long serialVersionUID = -6048714047459501464L;
-
+  @Column(name = ExampleConstants.SIGNIN_COLUMN_CREATEDAT_NAME, nullable = false)
+  private OffsetDateTime createdAt;
+  @Column(name = ExampleConstants.SIGNIN_COLUMN_HEADERS_NAME, nullable = false)
+  @JdbcTypeCode(SqlTypes.JSON)
+  private Map<String, Object> headers;
   @Id
   @Column(name = ExampleConstants.SIGNIN_COLUMN_ID_NAME, nullable = false, length = 32)
   private String id;
-
-  @Column(name = ExampleConstants.SIGNIN_COLUMN_CREATEDAT_NAME, nullable = false)
-  private OffsetDateTime createdAt;
-
+  @Column(name = ExampleConstants.SIGNIN_COLUMN_IP_NAME, nullable = false, length = 128)
+  private String ip;
+  @Column(name = ExampleConstants.SIGNIN_COLUMN_SUCCESS_NAME, nullable = false)
+  private Boolean success = false;
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"userId\"", nullable = false)
   private User user;
-
-  @Column(name = ExampleConstants.SIGNIN_COLUMN_IP_NAME, nullable = false, length = 128)
-  private String ip;
-
-  @Column(name = ExampleConstants.SIGNIN_COLUMN_HEADERS_NAME, nullable = false)
-  @JdbcTypeCode(SqlTypes.JSON)
-  private Map<String, Object> headers;
-
-  @Column(name = ExampleConstants.SIGNIN_COLUMN_SUCCESS_NAME, nullable = false)
-  private Boolean success = false;
 }

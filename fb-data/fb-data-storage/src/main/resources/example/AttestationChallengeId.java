@@ -39,15 +39,15 @@ public class AttestationChallengeId implements Serializable {
   private String userId;
 
   @Override
+  public int hashCode() {
+    return Objects.hash(id, userId);
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
     AttestationChallengeId entity = (AttestationChallengeId) o;
     return Objects.equals(this.id, entity.id) && Objects.equals(this.userId, entity.userId);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, userId);
   }
 }

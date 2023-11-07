@@ -18,16 +18,12 @@ import lombok.Setter;
 @Embeddable
 public class RemoteUserReference implements Serializable {
   private static final long serialVersionUID = 4885018018539853455L;
-
-  @Column(name = DBConstant.REMOTEUSERREFERENCE_COLUMN_URI_NAME, nullable = false)
-  private URI uri;
-
-  @Column(name = DBConstant.REMOTEUSERREFERENCE_COLUMN_URL_NAME)
-  private URL url;
-
-  @Column(name = DBConstant.REMOTEUSERREFERENCE_COLUMN_USERNAME_NAME, nullable = false)
-  private String username;
-
   @Column(name = DBConstant.REMOTEUSERREFERENCE_COLUMN_HOST_NAME, nullable = false)
   private String host;
+  @Column(name = DBConstant.REMOTEUSERREFERENCE_COLUMN_URI_NAME, nullable = false)
+  private URI uri;
+  @Column(name = DBConstant.REMOTEUSERREFERENCE_COLUMN_URL_NAME)
+  private URL url;
+  @Column(name = DBConstant.REMOTEUSERREFERENCE_COLUMN_USERNAME_NAME, nullable = false)
+  private String username;
 }

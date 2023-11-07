@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.jsonldjava.core.JsonLdOptions;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.utils.JsonUtils;
 import dev.puzzler995.fedibean.activitypub.spec.model.APObject;
 import dev.puzzler995.fedibean.activitypub.spec.model.Activity;
 import dev.puzzler995.fedibean.activitypub.spec.model.Actor;
@@ -14,6 +17,7 @@ import io.micrometer.core.instrument.util.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.json.JSONException;
@@ -33,10 +37,30 @@ import org.springframework.boot.test.json.JacksonTester;
 @AutoConfigureJson
 class JsonTests {
 
-  @Autowired private ObjectMapper objectMapper;
-  @Autowired private JsonTestParser jsonTestParser;
-
   @Autowired private JacksonTester<Resolvable> jacksonTester;
+  @Autowired private JsonTestParser jsonTestParser;
+  @Autowired private ObjectMapper objectMapper;
+
+  private static Stream<Integer> fileNumbersProvider() {
+    return IntStream.range(0, 159).boxed();
+  }
+
+  private static String readResource(String name) throws IOException {
+    ClassLoader classLoader = JsonTests.class.getClassLoader();
+    InputStream inputStream = classLoader.getResourceAsStream(name);
+    String jsonContent = "";
+    if (inputStream != null) {
+      try {
+        jsonContent = IOUtils.toString(inputStream);
+      } finally {
+        inputStream.close();
+      }
+    }
+    Object uncompact = JsonUtils.fromString(jsonContent);
+    Object compact = JsonLdProcessor.compact(uncompact, new HashMap<>(), new JsonLdOptions());
+    jsonContent = JsonUtils.toPrettyString(compact);
+    return jsonContent;
+  }
 
   private static Stream<Arguments> realWorldActivities() {
     return Stream.of(
@@ -50,6 +74,7 @@ class JsonTests {
         Arguments.of("akkoma_post_image.json", "Create"),
         Arguments.of("akkoma_quote_boost_cw.json", "Create"),
         Arguments.of("firefish_create_note.json", "Create"),
+        Arguments.of("firefish_create_poll.json", "Create"),
         Arguments.of("firefish_create_reply.json", "Create"),
         Arguments.of("firefish_edit_profile.json", "Update"),
         Arguments.of("firefish_emoji_react.json", "Like"),
@@ -65,58 +90,14 @@ class JsonTests {
         Arguments.of("mastodon_update_note.json", "Update"));
   }
 
-  private static String readResource(String name) throws IOException {
-    ClassLoader classLoader = JsonTests.class.getClassLoader();
-    InputStream inputStream = classLoader.getResourceAsStream(name);
-    String jsonContent = "";
-    if (inputStream != null) {
-      try {
-        jsonContent = IOUtils.toString(inputStream);
-      } finally {
-        inputStream.close();
-      }
-    }
-    return jsonContent;
-  }
-
-  private static Stream<Integer> fileNumbersProvider() {
-    return IntStream.range(0, 159).boxed();
-  }
-
   @ParameterizedTest
-  @MethodSource("realWorldActivities")
-  void canReadRealWorldActivities(String activityFile, String expected) {
+  @MethodSource("fileNumbersProvider")
+  void activityStreamDeserializationTest(int fileNumber) {
     try {
-      String json = readResource(activityFile);
+      String json = readResource("ASExamples/example_" + fileNumber + ".json");
       Resolvable actualR = this.jacksonTester.parseObject(json);
-      assertThat(actualR).isInstanceOf(Activity.class);
-      Activity actual = (Activity) actualR;
-      assertThat(actual.getType()).contains(expected);
-      String actualWrite = this.objectMapper.writeValueAsString(actual);
-      JSONAssert.assertEquals(json, actualWrite, false);
-      // jsonTestParser.parseJsonTest(this.objectMapper.readTree(json), actual); TODO: Fix this
-    } catch (IOException | JSONException e) {
-      fail("Failed due to exception: ", e);
-    }
-  }
-
-  @Test
-  void canReadRealWorldActor() {
-    try {
-      String json = readResource("mastodon_actor.json");
-      Resolvable actualR = this.jacksonTester.parseObject(json);
-      assertThat(actualR).isInstanceOf(Actor.class);
-      Actor actual = (Actor) actualR;
-      assertThat(actual).isNotNull();
-      assertThat(actual.getFollowing().getId())
-          .hasToString("https://mastodon.example/users/test_actor/following");
-      assertThat(actual.getFollowers().getId())
-          .hasToString("https://mastodon.example/users/test_actor/followers");
-      assertThat(actual.getInbox().getId())
-          .hasToString("https://mastodon.example/users/test_actor/inbox");
-      assertThat(actual.getOutbox().getId())
-          .hasToString("https://mastodon.example/users/test_actor/outbox");
-      String actualWrite = this.objectMapper.writeValueAsString(actual);
+      assertThat(actualR).isNotNull();
+      String actualWrite = this.objectMapper.writeValueAsString(actualR);
       JSONAssert.assertEquals(json, actualWrite, false);
     } catch (IOException | JSONException e) {
       fail("Failed due to exception: ", e);
@@ -156,13 +137,39 @@ class JsonTests {
   }
 
   @ParameterizedTest
-  @MethodSource("fileNumbersProvider")
-  void activityStreamDeserializationTest(int fileNumber) {
+  @MethodSource("realWorldActivities")
+  void canReadRealWorldActivities(String activityFile, String expected) {
     try {
-      String json = readResource("ASExamples/example_" + fileNumber + ".json");
+      String json = readResource(activityFile);
       Resolvable actualR = this.jacksonTester.parseObject(json);
-      assertThat(actualR).isNotNull();
-      String actualWrite = this.objectMapper.writeValueAsString(actualR);
+      assertThat(actualR).isInstanceOf(Activity.class);
+      Activity actual = (Activity) actualR;
+      assertThat(actual.getType()).contains(expected);
+      String actualWrite = this.objectMapper.writeValueAsString(actual);
+      JSONAssert.assertEquals(json, actualWrite, false);
+      // jsonTestParser.parseJsonTest(this.objectMapper.readTree(json), actual); TODO: Fix this
+    } catch (IOException | JSONException e) {
+      fail("Failed due to exception: ", e);
+    }
+  }
+
+  @Test
+  void canReadRealWorldActor() {
+    try {
+      String json = readResource("mastodon_actor.json");
+      Resolvable actualR = this.jacksonTester.parseObject(json);
+      assertThat(actualR).isInstanceOf(Actor.class);
+      Actor actual = (Actor) actualR;
+      assertThat(actual).isNotNull();
+      assertThat(actual.getFollowing().getId())
+          .hasToString("https://mastodon.example/users/test_actor/following");
+      assertThat(actual.getFollowers().getId())
+          .hasToString("https://mastodon.example/users/test_actor/followers");
+      assertThat(actual.getInbox().getId())
+          .hasToString("https://mastodon.example/users/test_actor/inbox");
+      assertThat(actual.getOutbox().getId())
+          .hasToString("https://mastodon.example/users/test_actor/outbox");
+      String actualWrite = this.objectMapper.writeValueAsString(actual);
       JSONAssert.assertEquals(json, actualWrite, false);
     } catch (IOException | JSONException e) {
       fail("Failed due to exception: ", e);

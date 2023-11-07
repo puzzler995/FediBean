@@ -19,8 +19,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Relationship extends APObject {
-  private Resolvable subject;
   private Resolvable object;
+  private Resolvable subject;
 
   @JsonGetter("relationship")
   public CompactedIri getRelationship() {

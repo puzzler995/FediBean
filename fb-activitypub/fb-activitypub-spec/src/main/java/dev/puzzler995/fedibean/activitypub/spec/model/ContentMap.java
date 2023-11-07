@@ -15,8 +15,8 @@ import lombok.Data;
 @JsonDeserialize(using = ContentMapDeserializer.class)
 public class ContentMap {
   private final Map<String, String> contentMap = new HashMap<>();
-  private final Set<String> languages = contentMap.keySet();
   private final String defaultCulture;
+  private final Set<String> languages = contentMap.keySet();
 
   public ContentMap(String cultureInfo) {
     this.defaultCulture = cultureInfo;

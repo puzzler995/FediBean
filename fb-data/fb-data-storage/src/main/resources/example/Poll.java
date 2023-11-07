@@ -35,34 +35,26 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = ExampleConstants.POLL_TABLE_NAME)
 public class Poll implements Serializable {
   private static final long serialVersionUID = 9112047729195168914L;
-
-  @Id
-  @Column(name = ExampleConstants.POLL_COLUMN_NOTEID_NAME, nullable = false, length = 32)
-  private String noteId;
-
+  @Column(name = ExampleConstants.POLL_COLUMN_CHOICES_NAME, nullable = false)
+  private List<String> choices;
+  @Column(name = ExampleConstants.POLL_COLUMN_EXPIRESAT_NAME)
+  private OffsetDateTime expiresAt;
+  @Column(name = ExampleConstants.POLL_COLUMN_MULTIPLE_NAME, nullable = false)
+  private Boolean multiple = false;
   @MapsId
   @OneToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "\"noteId\"", nullable = false)
   private Note note;
-
-  @Column(name = ExampleConstants.POLL_COLUMN_EXPIRESAT_NAME)
-  private OffsetDateTime expiresAt;
-
-  @Column(name = ExampleConstants.POLL_COLUMN_MULTIPLE_NAME, nullable = false)
-  private Boolean multiple = false;
-
-  @Column(name = ExampleConstants.POLL_COLUMN_CHOICES_NAME, nullable = false)
-  private List<String> choices;
-
-  @Column(name = ExampleConstants.POLL_COLUMN_VOTES_NAME, nullable = false)
-  private List<Integer> votes;
-
-  @Column(name = ExampleConstants.POLL_COLUMN_USERID_NAME, nullable = false, length = 32)
-  private String userId;
-
+  @Id
+  @Column(name = ExampleConstants.POLL_COLUMN_NOTEID_NAME, nullable = false, length = 32)
+  private String noteId;
   @Column(name = ExampleConstants.POLL_COLUMN_USERHOST_NAME, length = 128)
   private String userHost;
+  @Column(name = ExampleConstants.POLL_COLUMN_USERID_NAME, nullable = false, length = 32)
+  private String userId;
+  @Column(name = ExampleConstants.POLL_COLUMN_VOTES_NAME, nullable = false)
+  private List<Integer> votes;
 
   /*
       TODO [JPA Buddy] create field to map the '\"noteVisibility\"' column

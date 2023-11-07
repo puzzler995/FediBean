@@ -16,13 +16,11 @@ import org.springframework.data.annotation.CreatedBy;
 @Table(name = "block")
 public class Block extends DBEntity {
   private static final long serialVersionUID = -8537115165593850954L;
-
+  @ManyToOne
+  @JoinColumn(name = "blockee_id")
+  private User blockee;
   @CreatedBy
   @ManyToOne
   @JoinColumn(name = "blocker_id")
   private User blocker;
-
-  @ManyToOne
-  @JoinColumn(name = "blockee_id")
-  private User blockee;
 }

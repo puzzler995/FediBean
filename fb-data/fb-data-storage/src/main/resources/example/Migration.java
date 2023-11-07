@@ -30,13 +30,11 @@ public class Migration implements Serializable {
   @Id
   @Column(name = ExampleConstants.MIGRATION_COLUMN_ID_NAME, nullable = false)
   private Integer id;
-
-  @Column(name = ExampleConstants.MIGRATION_COLUMN_TIMESTAMP_NAME, nullable = false)
-  private Long timestamp;
-
   @Column(
       name = ExampleConstants.MIGRATION_COLUMN_NAME_NAME,
       nullable = false,
       length = Integer.MAX_VALUE)
   private String name;
+  @Column(name = ExampleConstants.MIGRATION_COLUMN_TIMESTAMP_NAME, nullable = false)
+  private Long timestamp;
 }
