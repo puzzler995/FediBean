@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+note "Solid lines show parents" as N1
+note "Dashed lines show dependencies" as N2
+FediBean -- "fb-server"
+"fb-server" -- "fb-server-deploy"
+"fb-server" -- "fb-server-modules"
+"fb-server" -- "fb-server-handler"
+FediBean -- "fb-ui"
+"fb-ui" -- "fb-ui-app"
+"fb-ui" -- "fb-ui-modules"
+FediBean -- "fb-data"
+"fb-data" -- "fb-data-modules"
+"fb-data" -- "fb-data-storage"
+"fb-data" -- "fb-data-queue"
+FediBean -- "fb-common"
+FediBean -- "fb-federation"
+"fb-federation" -- "fb-federation-modules"
+"fb-federation" -- "fb-federation-spec"
+"fb-federation" -- "fb-federation-handler"
+
+"fb-server-deploy" ..> "fb-server-modules"
+"fb-server-modules" ..> "fb-server-handler"
+"fb-server-modules" ..> "fb-ui-modules"
+"fb-server-modules" ..> "fb-data-modules"
+"fb-server-modules" ..> "fb-federation-modules"
+"fb-ui-modules" ..> "fb-ui-app"
+"fb-data-modules" ..> "fb-data-storage"
+"fb-data-modules" ..> "fb-data-queue"
+"fb-federation-modules" ..> "fb-federation-spec"
+"fb-federation-modules" ..> "fb-federation-handler"
+hide empty members
+hide circle
+@enduml

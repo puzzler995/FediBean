@@ -3,6 +3,7 @@ fb-activitypub/fb-activitypub-old/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+frontend/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
