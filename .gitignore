@@ -3,7 +3,18 @@ fb-activitypub/fb-activitypub-old/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-frontend/
+
+### Vaadin ###
+node_modules/
+**/frontend/generated/
+frontend/generated/
+pnpmfile.js
+.npmrc
+webpack.generated.js
+vite.generated.js
+tsconfig.json
+types.d.ts
+index.html
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -41,3 +52,4 @@ build/
 ### Mac OS ###
 .DS_Store
 .idea/
+
