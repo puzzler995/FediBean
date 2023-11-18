@@ -15,15 +15,15 @@ import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 @RelationshipProperties
 @Data
 @AllArgsConstructor
-public class ReactionRelationship {
+public class MuteRelationship {
   private final OffsetDateTime createdAt;
-  private final String reaction;
   private final URI uri;
-  @TargetNode private final UserNode user;
+  private OffsetDateTime expiresAt;
 
   @GeneratedValue(UUIDStringGenerator.class)
   private String id;
 
   @RelationshipId @GeneratedValue private Long internalId;
+  @TargetNode private UserNode user;
   @Version private Long version;
 }

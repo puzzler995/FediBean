@@ -1,0 +1,291 @@
+@startuml Database Graph Schema
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+note as N1
+Green Arrow: Single
+Red Arrow: List
+Dotted: incoming
+Solid: outgoing
+end note
+
+
+'Start AbuseReport
+class "AbuseReport: AbuseReportNode" as abuseReport << (N,orchid) >> {
+    URI uri
+    String id
+    String reason
+    Long version
+}
+abuseReport <.[#green]. user : "CREATED_REPORT: reportedBy"
+abuseReport -[#green]-> user : "REPORTED_USER: reportedUser"
+abuseReport -[#green]-> post : "REPORTED_POST: reportedPost"
+'End AbuseReport
+
+'Start Announcement
+class "Announcement: AnnouncementNode" as announcement << (N,orchid) >> {
+    String content
+    OffsetDateTime createdAt
+    String id
+    OffsetDateTime startTime
+    OffsetDateTime endTime
+    Long version
+    OffsetDateTime updatedAt
+    String title
+    Boolean isActive
+
+}
+announcement <.[#green]. user : "POSTED: postedBy"
+announcement <.[#red]. user : "READ: readBy"
+'End Announcement
+
+'Start Asset
+class "Asset: AssetNode" as asset << (N,orchid) >> {
+    URI uri
+    String id
+    String mimeType
+    URI url
+    URI thumbnailUrl
+    URI publicUrl
+    Long version
+    Boolean isLocal
+    OffsetDateTime createdAt
+    String md5
+    Integer size
+    String comment
+    String name
+    String blurhash
+    Integer width
+    Integer height
+    Integer duration
+    Integer orientation
+    String averageColor
+    Boolean isSensitive
+}
+asset <.[#green]. user : "UPLOADED: uploadedBy"
+asset -[#green]-> assetFolder : "IN: inFolder"
+'End Asset
+
+'Start AssetFolder
+class "AssetFolder: AssetFolderNode" as assetFolder << (N,orchid) >> {
+    String id
+    String name
+    Long version
+}
+assetFolder -[#green]-> assetFolder : "IN: inFolder"
+assetFolder <.[#green]. user : "CREATED: createdBy"
+'End AssetFolder
+
+'Start Emoji
+class "Emoji: EmojiNode" as emoji << (N,orchid) >> {
+    String id
+    String name
+    Long version
+    String category
+    List<String> keywords
+    String license
+    URI source
+}
+emoji <.[#green]. asset : "IMAGE_FOR: image"
+emoji -[#green]-> server : "ON: onServer"
+'End Emoji
+
+'Start Following
+class "FOLLOWS: FollowRelationship" as following <<(R, gold)>>{
+    URI uri
+    OffsetDateTime createdAt
+    String id
+    Long internalId
+    Long version
+    Boolean notify
+    Boolean isPending
+}
+following -[#green]-> user : user
+'End Following
+
+'Start Hashtag
+class "Hashtag: HashtagNode" as hashtag << (N,orchid) >> {
+    String id
+    String name
+    Long version
+}
+'End Hashtag
+
+'Start Muting
+class "MUTES: MuteRelationship" as muting <<(R, gold)>>{
+    URI uri
+    OffsetDateTime createdAt
+    String id
+    Long internalId
+    Long version
+    OffsetDateTime expiresAt
+}
+muting -[#green]-> user : user
+'End Muting
+
+'Start Poll
+class "Poll: PollNode" as poll << (N,orchid) >> {
+    String id
+    Long version
+    OffsetDateTime expiresAt
+    Boolean allowsMultiple
+}
+poll -[#red]-> pollOption : "HAS_OPTIONS: options"
+'End Poll
+'Start PollOption
+class "PollOption: PollOptionNode" as pollOption << (N,orchid) >> {
+    String id
+    Long version
+    String text
+    Integer votesCount
+}
+pollOption <.[#red]. user : "VOTED: votedBy"
+'End PollOption
+
+'Start Post
+class "Post: PostNode" as post << (N,orchid) >> {
+    URI uri
+    String content
+    OffsetDateTime createdAt
+    String id
+    Boolean isLocalOnly
+    Long version
+    PostVisibility visibility
+    String summary
+}
+
+post -[#green]-> post : "BOOSTS: boostedPost"
+post -[#green]-> post : "REPLIES_TO: repliesTo"
+post <.[#green]. user : "POSTED: postedBy"
+post <.[#red]. reaction : "REACTS_TO: reactions"
+post <.[#red]. asset : "ATTACHED_TO: attachments"
+post -[#red]-> hashtag : "TAGGED_WITH: tags"
+post -[#red]-> user : "MENTIONS: mentions"
+post -[#red]-> emoji : "EMOJI: emojis"
+post <.[#red]. user : "MUTED: mutedBy"
+post -[#green]-> poll: "HAS_POLL: poll"
+
+enum "PostVisibility" as visibility {
+    PUBLIC
+    UNLISTED
+    FOLLOWERS
+    DIRECT
+}
+
+post::visibility -left[dotted]- visibility
+'End Post
+
+'Start Reaction
+class "REACTS_TO: ReactionRelationship" as reaction <<(R, gold)>> {
+    URI uri
+    OffsetDateTime createdAt
+    String id
+    String reaction
+    Long internalId
+    Long version
+}
+reaction <.[#green]. user : user
+'End Reaction
+
+'Start Server
+class "Server: ServerNode" as server << (N,orchid) >> {
+    String id
+    Long version
+    String name
+    OffsetDateTime firstSeenAt
+    OffsetDateTime lastSeenAt
+    String host
+    OffsetDateTime lastRequestReceivedAt
+    OffsetDateTime lastRequestSentAt
+    Boolean isNotResponding
+    Boolean isSilenced
+    Boolean isBlocked
+    String software
+    String softwareVersion
+    String description
+    String maintainer
+    String maintainerEmail
+    Integer usersCount
+    Integer postsCount
+    URI iconUrl
+    URI faviconUrl
+    String themeColor
+    Boolean isLocal
+}
+'End Server
+
+'Start User
+class "User: UserNode" as user << (N,orchid) >> {
+    URI uri
+    String displayName
+    String id
+    String username
+    Long version
+    OffsetDateTime createdAt
+    OffsetDateTime updatedAt
+    OffsetDateTime lastSeenAt
+    OffsetDateTime lastActiveAt
+    Boolean hideOnlineStatus
+    URI movedTo
+    OffsetDateTime movedAt
+    List<URI> alsoKnownAs
+    Boolean isSuspended
+    Boolean isLocked
+    Boolean isBot
+    Boolean isExplorable
+    Boolean isDeleted
+    URI inbox
+    URI sharedInbox
+    URI followersUri
+}
+
+user -[#red]-> following : "FOLLOWS: following"
+user -[#red]-> muting : "MUTES: muting"
+user -[#red]-> user : "BLOCKS: blocked"
+user <.[#green]. asset : "AVATAR_FOR: avatar"
+user <.[#green]. asset : "HEADER_FOR: header"
+user -[#green]-> server: "ON: onServer"
+'End User
+
+'Start UserList
+class "UserList: UserListNode" as userList << (N,orchid) >> {
+    String id
+    Long version
+    String name
+    Boolean isPublic
+}
+userList <.[#red]. user : "MEMBER_OF: members"
+userList <.[#green]. user: "CREATED: createdBy"
+'End UserList
+
+'Start UserProfile
+class "UserProfile: UserProfileNode" as userProfile << (N,orchid) >> {
+    String id
+    Long version
+    String location
+    Date birthday
+    String bio
+    Map<String, String> fields
+    List<URI> verifiedLinks
+    String pronouns
+}
+userProfile <.[#green]. user : "PROFILE: profileOf"
+userProfile <.[#red]. emoji : "IN_BIO: emojis"
+'End UserProfile
+
+'Start UserPreferences
+class "UserPreferences: UserPreferencesNode" as userPreferences << (N,orchid) >>{
+    String id
+    Long version
+    String email
+    Boolean isEmailConfirmed
+    Boolean isReactionsPublic
+    String password
+    Boolean autoAcceptFollowers
+    Boolean isNoIndex
+    Boolean isNoAi
+}
+userPreferences <.[#green]. user : "PREFERENCES: preferencesOf"
+'End UserPreferences
+@enduml

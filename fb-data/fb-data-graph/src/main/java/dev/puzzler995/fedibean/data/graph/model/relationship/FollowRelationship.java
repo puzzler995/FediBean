@@ -1,10 +1,10 @@
 package dev.puzzler995.fedibean.data.graph.model.relationship;
 
 import dev.puzzler995.fedibean.data.graph.model.node.UserNode;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.RelationshipId;
@@ -16,13 +16,15 @@ import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 @Data
 @AllArgsConstructor
 public class FollowRelationship {
-  private final String activityPubId;
-  @CreatedDate private final OffsetDateTime createdAt;
+  private final OffsetDateTime createdAt;
+  private final URI uri;
   @TargetNode private final UserNode user;
 
-  @RelationshipId
   @GeneratedValue(UUIDStringGenerator.class)
   private String id;
 
+  @RelationshipId @GeneratedValue private Long internalId;
+  private Boolean isNotificationsEnabled;
+  private Boolean isPending;
   @Version private Long version;
 }

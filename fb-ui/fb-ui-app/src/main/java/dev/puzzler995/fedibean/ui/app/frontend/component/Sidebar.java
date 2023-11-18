@@ -23,13 +23,13 @@ import org.vaadin.lineawesome.LineAwesomeIcon;
 
 public class Sidebar extends VerticalLayout {
   @Serial private static final long serialVersionUID = 978242534041635953L;
-  private Boolean isSmall = true;
   private final SideNav sideNav = new SideNav();
   private final SideNavItem test2Item =
       new SideNavItem("test2", Test2View.class, LineAwesomeIcon.ATLASSIAN.create());
   private final SideNavItem testItem =
       new SideNavItem("test", TestView.class, LineAwesomeIcon.HOME_SOLID.create());
   private final Button toggle = new Button(LineAwesomeIcon.CHEVRON_LEFT_SOLID.create());
+  private Boolean isSmall = true;
 
   public Sidebar() {
     testItem.addClassName(AlignSelf.CENTER);
