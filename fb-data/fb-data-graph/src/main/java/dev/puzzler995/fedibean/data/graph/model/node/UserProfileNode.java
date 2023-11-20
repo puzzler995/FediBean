@@ -1,7 +1,7 @@
 package dev.puzzler995.fedibean.data.graph.model.node;
 
 import java.net.URI;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 @AllArgsConstructor
 public class UserProfileNode {
   private String bio;
-  private Date birthday;
+  private LocalDate birthday;
 
   @Relationship(type = "IN_BIO", direction = Direction.INCOMING)
   private List<EmojiNode> emojisInBio;

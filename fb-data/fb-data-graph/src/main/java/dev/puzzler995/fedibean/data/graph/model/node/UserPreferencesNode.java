@@ -25,6 +25,10 @@ public class UserPreferencesNode {
   private Boolean isNoAi;
   private Boolean isNoIndex;
   private Boolean isReactionsPublic;
+  private Boolean isAccountNonExpired;
+  private Boolean isAccountNonLocked;
+  private Boolean isCredentialsNonExpired;
+  private Boolean isEnabled;
   private String password;
 
   @Relationship(type = "PREFERENCES", direction = Direction.INCOMING)

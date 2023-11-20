@@ -6,8 +6,11 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 import dev.puzzler995.fedibean.ui.app.frontend.component.BodyContainer;
 import dev.puzzler995.fedibean.ui.app.frontend.component.Sidebar;
+import java.io.Serial;
 
 public class MainView extends HorizontalLayout implements RouterLayout {
+  @Serial private static final long serialVersionUID = 8406847076955743651L;
+
   public MainView() {
     Sidebar layoutCol = new Sidebar();
     BodyContainer layoutCol2 = new BodyContainer();

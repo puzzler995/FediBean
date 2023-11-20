@@ -1,5 +1,4 @@
 target/
-fb-activitypub/fb-activitypub-old/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -53,4 +52,4 @@ build/
 .DS_Store
 .idea/
 
-/fb-server/fb-server-deploy/.jqwik-database
+.jqwik-database

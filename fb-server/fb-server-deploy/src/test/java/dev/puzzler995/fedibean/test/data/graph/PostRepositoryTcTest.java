@@ -17,6 +17,7 @@ import org.testcontainers.containers.Neo4jContainer;
 
 @DataNeo4jTest
 @ContextConfiguration(classes = {FediBeanApplication.class})
+
 class PostRepositoryTcTest {
   private static Neo4jContainer<?> neo4jContainer;
 
@@ -39,7 +40,7 @@ class PostRepositoryTcTest {
   }
 
   @Test
-  void testFindSomethingShouldWork(@Autowired Neo4jClient client) {
+  final void testFindSomethingShouldWork(@Autowired Neo4jClient client) {
     Optional<Long> result = client.query("MATCH (n) RETURN COUNT(n)").fetchAs(Long.class).one();
     assertThat(result).hasValue(0L);
   }
