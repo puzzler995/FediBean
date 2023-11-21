@@ -1,0 +1,142 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1-SNAPSHOT
+  title: Fedibean API
+  description: API for Access to a Fedibean instance
+  contact:
+    name: "Katherine Marsee - Lead Dev"
+    url: "https://fedi.codepenguin.io/puzzler"
+    email: "ksmarsee@gmail.com"
+  license:
+    name: "GNU Affero General Public License 3"
+    url: "https://www.gnu.org/licenses/agpl-3.0.en.html"
+servers:
+  - url: "https://fedibean.example.com/api"
+    description: "Example Endpoint"
+components:
+  responses:
+    Error:
+      description: There was an error processing your request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Error"
+              - example:
+                  code: "internal_server_error"
+                  message: "There was an error processing your request"
+                  id: "83f8b6f6-a8f7-4baf-b8b6-f6a8f7bbaf57"
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Error"
+              - example:
+                  code: "not_found"
+                  message: "The specified resource was not found"
+                  id: "83f8b6f6-a8f7-4baf-b8b6-f6a8f7bbaf57"
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "A short code describing the error"
+        message:
+          type: string
+          description: "A human-readable message describing the error"
+        id:
+          type: string
+          format: uuid
+          description: "A unique ID for this error"
+      required:
+        - code
+        - message
+        - id
+    Emoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "The name of the emoji"
+          nullable: false
+          example: "blobcat"
+        url:
+          type: string
+          description: "The URL for the emoji image"
+          nullable: false
+          example: "https://fedibean.example.com/emoji/blobcat.png"
+      required:
+        - name
+        - url
+    BasicUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User ID
+          nullable: false
+          example: 83f8b6f6-a8f7-4baf-b8b6-f6a8f7bbaf57
+        username:
+          type: string
+          nullable: false
+          example: puzzler
+          description: The user's username, not including domain
+        displayName:
+          type: string
+          nullable: true
+          description: The custom display name set by the user
+          example: Katherine Marsee
+        instance:
+          type: string
+          nullable: false
+          description: The domain for the instance the user is on. this includes the local users
+          example: fedibean.example.com
+        avatarUrl:
+          type: string
+          nullable: true
+          description: The URL for the user's avatar
+          example: https://fedibean.example.com/avatars/original/missing.png
+        avatarBlurhash:
+          type: string
+          nullable: true
+          description: The blurhash for the user's avatar
+          example: "yACPCV%202I;^PRkSg4nIVtRRj%1bHWC5-NH}?%19ubFsANws:$%R+Nbs:t6r?WBkCNHRka|oL%Lofsms:kCNboLWBNGR*t6oKjZWV"
+        avatarColor:
+          type: string
+          nullable: true
+          description: The color for the user's avatar
+          example: "#f0f0f0"
+    FullUser:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/BasicUser"
+paths:
+  "/users/{id}":
+    get:
+      tags:
+        - user
+      summary: "Get User by ID."
+      description: "Gets the User object stored locally in the instance by the provided ID."
+      operationId: "getUserById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FullUser"
+        404:
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/Error"
