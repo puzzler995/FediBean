@@ -7,17 +7,18 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class JsonContext {
-  public static final JsonContext ACTIVITY_STREAMS = new JsonContext(null, null, "https://www.w3.org/ns/activitystreams");
+  public static final JsonContext ACTIVITY_STREAMS =
+      new JsonContext(null, null, "https://www.w3.org/ns/activitystreams");
+  private String iri;
   private String key;
   private String prefix;
-  private String iri;
 
-  public JsonContext fromString(String string) {
+  public static JsonContext fromString(String contextString) {
     JsonContext context;
-    if (string.startsWith("http")) {
-      context = new JsonContext(null, null, string);
+    if (contextString.startsWith("http")) {
+      context = new JsonContext(null, null, contextString);
     } else {
-      String[] split = string.split(":(?![^:]*//)", 2);
+      String[] split = contextString.split(":(?![^:]*//)", 2);
       if (split.length == 2) {
         if (split[1].startsWith("http")) {
           context = new JsonContext(split[0], null, split[1]);
@@ -26,18 +27,28 @@ public class JsonContext {
           if (iriParts.length == 2) {
             context = new JsonContext(split[0], iriParts[0], iriParts[1]);
           } else {
-            throw new IllegalArgumentException("Invalid context string: " + string);
+            throw new IllegalArgumentException("Invalid context string: " + contextString);
           }
         }
       } else {
-        throw new IllegalArgumentException("Invalid context string: " + string);
+        throw new IllegalArgumentException("Invalid context string: " + contextString);
       }
     }
     return context;
   }
 
-  public JsonContext fromString(String key, String string) {
+  public static JsonContext fromString(String key, String contextString) {
     JsonContext context;
+    if (contextString.startsWith("http")) {
+      context = new JsonContext(key, null, contextString);
+    } else {
+      String[] split = contextString.split(":(?![^:]*//)", 2);
+      if (split.length == 2) {
+        context = new JsonContext(key, split[0], split[1]);
+      } else {
+        throw new IllegalArgumentException("Invalid context string: " + contextString);
+      }
+    }
 
     return context;
   }
