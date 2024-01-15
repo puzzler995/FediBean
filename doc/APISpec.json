@@ -1,0 +1,133 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FediBean API",
+    "description": "FediBean API Spec",
+    "version": "0.0.1-SNAPSHOT",
+    "license": {
+      "name": "GNU Affero General Public License v3.0 or later",
+      "identifier": "AGPL-3.0-or-later",
+      "url": "https://spdx.org/licenses/AGPL-3.0-or-later.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://localhost:8080/beanapi/v1/",
+      "description": "Local Development Server"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UserMin": {},
+      "Post" : {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": false,
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": false,
+            "format": "date-time"
+          },
+          "content": {
+            "type": "string",
+            "nullable": false
+          },
+          "author": {
+            "$ref": "#/components/schemas/UserMin",
+            "nullable": false
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "posts": {
+      "get": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Get all posts",
+        "operationId": "getPosts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Create a post",
+        "operationId": "createPost",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
